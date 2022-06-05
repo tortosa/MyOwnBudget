@@ -9,7 +9,7 @@ namespace Budgets.Domain
         protected Account() { }
 
         public string Label { get; set; }
-        public List<Transaction> Transactions { get; set; }
+        public List<Transaction> Transactions { get; }
 
         public Money Balance => GetBalance();
 

@@ -10,7 +10,7 @@ namespace Budgets.Domain
         public Money Money { get; set; }
         public DateTime Date { get; set; }
         public Payee Payee { get; set; }
-        public BudgetCategory BudgetCategory { get; set; }
+        public BudgetCategory BudgetCategory { get;}
         public Account Account { get; set; }
 
         public Transaction(Money money, DateTime date, Payee payee, BudgetCategory budgetCategory, Account account)
@@ -20,6 +20,7 @@ namespace Budgets.Domain
             Payee = payee;
             BudgetCategory = budgetCategory;
             Account = account;
+            Account.AddTransactions(this);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Budgets.Domain
         protected BudgetCategoryGroup() { }
 
         public string Label { get; set; }
-        public List<BudgetCategory> BudgetCategories { get; set; }
+        public List<BudgetCategory> BudgetCategories { get; }
         public Money AssignedMoney => GetBalance();
 
         private Money GetBalance()

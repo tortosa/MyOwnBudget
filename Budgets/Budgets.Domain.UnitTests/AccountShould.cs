@@ -48,5 +48,21 @@ namespace Budgets.Domain.UnitTests
 
             Assert.Equal(expectedBalance, account.Balance);
         }
+
+        [Fact]
+        public void AccountDecreaseWhenTransactionIsAssociated()
+        {
+            var account = new AccountBuilder()
+               .Build();
+
+            var moneyAdded = Money.Euro(12);
+
+            var transaction1 = new TransactionBuilder()
+                .WithMoney(moneyAdded)
+                .WithAccount(account)
+                .Build();
+
+            Assert.Equal(moneyAdded, transaction1.Account.Balance);
+        }
     }
 }
