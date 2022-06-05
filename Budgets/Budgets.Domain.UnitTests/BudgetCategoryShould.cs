@@ -1,6 +1,7 @@
 using Budgets.Domain.UnitTests.Builders;
 using Budgets.Domain.ValueObjects;
 using NodaMoney;
+using System;
 using System.Linq;
 using Xunit;
 
@@ -46,7 +47,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void BudgetCategoryShouldHaveAssignedMoneyInASpecificMoment()
+        public void BudgetCategoryShouldHaveAssignedMoneyAtMonthYear()
         {
             var budgetCategoryDate = new MonthYear(Month.April, 2030);
             var expectedMoneyAssigned = Money.Euro(1250.23);
@@ -61,6 +62,37 @@ namespace Budgets.Domain.UnitTests
                 .Build();
 
             Assert.Equal(expectedAssignedMoney.AssignedMoney, budgetCategory.MoneyAssigned.Sum(x => (decimal)x.AssignedMoney));
+        }
+
+        // TODO: Pending to improve
+        [Fact]
+        public void BudgetCategoryShouldHaveAvailableMoneyAtMonthYear()
+        {
+            var transactionDate = new DateTime(2022, 04, 16, 10, 00, 00);
+
+            var budgetCategoryDate = new MonthYear(Month.April, 2022);
+            var expectedMoneyAvailable = Money.Euro(1250.23);
+
+            var budgetCategory = new BudgetCategoryBuilder()
+                .Build();
+            var account = new AccountBuilder()
+                .Build();
+
+            var transaction = new TransactionBuilder()
+                .WithBudgetCategory(budgetCategory)
+                .WithAccount(account)
+                .WithMoney(expectedMoneyAvailable)
+                .WithDate(transactionDate)
+                .Build();
+
+            var anotherTransaction = new TransactionBuilder()
+                .WithBudgetCategory(new BudgetCategoryBuilder().Build())
+                .WithAccount(account)
+                .WithMoney(Money.Euro(5000.00))
+                .WithDate(new DateTime(2010, 01, 01))
+                .Build();
+
+            Assert.Equal(expectedMoneyAvailable, budgetCategory.GetAvailableMoneyAt(budgetCategoryDate));
         }
     }
 }
