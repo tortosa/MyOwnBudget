@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Budgets.Domain
+﻿namespace Budgets.Domain
 {
     public class BudgetCategoryGroup
     {

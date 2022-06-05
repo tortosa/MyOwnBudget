@@ -1,17 +1,10 @@
 using Budgets.Domain.UnitTests.Builders;
-using System;
 using Xunit;
 
 namespace Budgets.Domain.UnitTests
 {
     public class BudgetShould
     {
-
-        /*
-        Number Format
-        Currency placement
-        Date format
-         */
         [Fact]
         public void BudgetShouldHaveLabel()
         {

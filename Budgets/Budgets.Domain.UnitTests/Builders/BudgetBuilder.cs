@@ -1,7 +1,4 @@
-﻿using NodaMoney;
-using System.Collections.Generic;
-
-namespace Budgets.Domain.UnitTests.Builders
+﻿namespace Budgets.Domain.UnitTests.Builders
 {
     public class BudgetBuilder
     {

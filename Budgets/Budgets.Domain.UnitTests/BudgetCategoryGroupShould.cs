@@ -1,5 +1,4 @@
 using Budgets.Domain.UnitTests.Builders;
-using System;
 using Xunit;
 
 namespace Budgets.Domain.UnitTests
