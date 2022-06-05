@@ -73,36 +73,49 @@ namespace Budgets.Domain.UnitTests
             Assert.Equal(expectedMoney, budgetCategory.GetAssignedMoneyAt(monthYear));
         }
 
-
-        // TODO: Pending to improve
         [Fact]
-        public void BudgetCategoryShouldHaveAvailableMoneyAtMonthYear()
+        public void BudgetCategoryShouldHaveRightAvailableMoneyAtNextMonthYear()
         {
-            var transactionDate = new DateTime(2022, 04, 16, 10, 00, 00);
+            var monthYearMay = new MonthYear(Month.May, 2022);
+            var monthYearJune = new MonthYear(Month.June, 2022);
 
-            var budgetCategoryDate = new MonthYear(Month.April, 2022);
-            var expectedMoneyAvailable = Money.Euro(1250.23);
+            var moneyAssignedInMay = Money.Euro(200);
+            var moneyAssignedInJune = Money.Euro(300);
+
+            var moneyTransactionInMay1 = Money.Euro(-50);
+            var moneyTransactionInMay2 = Money.Euro(-50);
+
+            var moneyTransactionInJune = Money.Euro(-20);
 
             var budgetCategory = new BudgetCategoryBuilder()
-                .Build();
-            var account = new AccountBuilder()
+                .WithMoneyAssigned(monthYearMay, moneyAssignedInMay)
+                .WithMoneyAssigned(monthYearJune, moneyAssignedInJune)
                 .Build();
 
-            var transaction = new TransactionBuilder()
+            var transactionMay1 = new TransactionBuilder()
                 .WithBudgetCategory(budgetCategory)
-                .WithAccount(account)
-                .WithMoney(expectedMoneyAvailable)
-                .WithDate(transactionDate)
+                .WithMoney(moneyTransactionInMay1)
+                .WithDate(new DateTime(monthYearMay.Year, (int)monthYearMay.Month, 16, 10, 00, 00))
                 .Build();
 
-            var anotherTransaction = new TransactionBuilder()
-                .WithBudgetCategory(new BudgetCategoryBuilder().Build())
-                .WithAccount(account)
-                .WithMoney(Money.Euro(5000.00))
-                .WithDate(new DateTime(2010, 01, 01))
+            var transactionMay2 = new TransactionBuilder()
+                .WithBudgetCategory(budgetCategory)
+                .WithMoney(moneyTransactionInMay2)
+                .WithDate(new DateTime(monthYearMay.Year, (int)monthYearMay.Month, 20, 10, 00, 00))
                 .Build();
 
-            Assert.Equal(expectedMoneyAvailable, budgetCategory.GetAvailableMoneyAt(budgetCategoryDate));
+            var transactionJune = new TransactionBuilder()
+                .WithBudgetCategory(budgetCategory)
+                .WithMoney(moneyTransactionInJune)
+                .WithDate(new DateTime(monthYearJune.Year, (int)monthYearJune.Month, 20, 10, 00, 00))
+                .Build();
+
+            var account = new AccountBuilder()
+                .WithTransactions(transactionMay1, transactionMay2, transactionJune)
+                .Build();
+
+            var expectedMoneyAvailableInJune = moneyAssignedInJune + moneyAssignedInMay + moneyTransactionInMay1 + moneyTransactionInMay2 + moneyTransactionInJune;
+            Assert.Equal(expectedMoneyAvailableInJune, budgetCategory.GetAvailableMoneyAt(monthYearJune));
         }
     }
 }

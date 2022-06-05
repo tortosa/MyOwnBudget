@@ -29,6 +29,19 @@ namespace Budgets.Domain.ValueObjects
             Year = year;
         }
 
+        public MonthYear GetPreviousMonth()
+        {
+            var month = (int)Month -1;
+            var year = Year;
+            if(month == 0)
+            {
+                month = 12;
+                --year;
+            }
+
+            return new MonthYear((Month)month, year);
+        }
+
         public bool Equals(MonthYear monthYear)
         {
             if (monthYear is null)
@@ -52,5 +65,19 @@ namespace Budgets.Domain.ValueObjects
         public override bool Equals(object obj) => this.Equals(obj as MonthYear);
 
         public override int GetHashCode() => (this.Month, this.Year).GetHashCode();
+
+        public static bool operator ==(MonthYear op1, MonthYear op2)
+        {
+            if (op1 is null)
+            {
+                if (op2 is null)
+                    return true;
+                
+                return false;
+            }
+            return op1.Equals(op2);
+        }
+
+        public static bool operator !=(MonthYear op1, MonthYear op2) => !(op1 == op2);
     }
 }

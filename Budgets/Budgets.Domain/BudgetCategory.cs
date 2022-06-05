@@ -37,14 +37,21 @@ namespace Budgets.Domain
 
         public Money GetAvailableMoneyAt(MonthYear monthYear)
         {
+            var previousMonthYear = monthYear.GetPreviousMonth();
+
+            var previousMonthMoneyAssigned = MoneyAssigned.Where(assigned => previousMonthYear == assigned.Key).ToList();
+            var moneyAssigned = MoneyAssigned.Where(assigned => monthYear == assigned.Key).ToList();
+
+            var previusMonthTransactions = TransactionsAssociated.Where(transaction => previousMonthYear.Year == transaction.Date.Year && (int)previousMonthYear.Month == transaction.Date.Month).ToList();
             var transactionsAt = TransactionsAssociated.Where(transaction => monthYear.Year == transaction.Date.Year && (int)monthYear.Month == transaction.Date.Month).ToList();
-            var moneyAssignedAt = MoneyAssigned.Where(assigned => assigned.Key == monthYear).ToList();
+ 
+            var availableAt =
+                previousMonthMoneyAssigned.Sum(x => (decimal)x.Value) +
+                moneyAssigned.Sum(x => (decimal)x.Value) +
+                previusMonthTransactions.Sum(x => (decimal)x.Money) +
+                transactionsAt.Sum(x => (decimal)x.Money);
 
-            var availableAt = moneyAssignedAt.Sum(x => (decimal)x.Value);
-
-            return TransactionsAssociated
-                .Where(transaction => monthYear.Year == transaction.Date.Year && (int)monthYear.Month == transaction.Date.Month)
-                .Sum(transaction => (decimal)transaction.Money);
+            return availableAt;
         }
 
         public Money GetAssignedMoneyAt(MonthYear monthYear)
