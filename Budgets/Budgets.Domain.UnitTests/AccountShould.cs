@@ -1,3 +1,4 @@
+using Budgets.Domain.UnitTests.Builders;
 using System;
 using Xunit;
 
@@ -9,7 +10,9 @@ namespace Budgets.Domain.UnitTests
         public void AccountShouldHaveLabel()
         {
             var expectedLabel = "account name";
-            var account = new Account(expectedLabel);
+            var account = new AccountBuilder()
+                .WithLabel(expectedLabel)
+                .Build();
 
             Assert.Equal(expectedLabel, account.Label);             
         }
@@ -18,7 +21,9 @@ namespace Budgets.Domain.UnitTests
         public void AccountShouldNotAllowEmptyLabel()
         {
             var expectedLabel = string.Empty;
-            var account = new Account(expectedLabel);
+            var account = new AccountBuilder()
+               .WithLabel(expectedLabel)
+               .Build();
 
             Assert.NotEmpty(account.Label);
         }
@@ -30,12 +35,16 @@ namespace Budgets.Domain.UnitTests
             var sum2 = -21.43;
             var expectedBalance = sum1 + sum2;
 
-            var transaction1 = new Transaction(sum1);
-            var transaction2 = new Transaction(sum2);
+            var transaction1 = new TransactionBuilder()
+                .WithValue(sum1)
+                .Build();
+            var transaction2 = new TransactionBuilder()
+                .WithValue(sum2)
+                .Build();
 
-            var account = new Account("temp");
-
-            account.AddTransactions(transaction1, transaction2);
+            var account = new AccountBuilder()
+               .WithTransactions(transaction1, transaction2)
+               .Build();
 
             Assert.Equal(expectedBalance, account.Balance);
         }
