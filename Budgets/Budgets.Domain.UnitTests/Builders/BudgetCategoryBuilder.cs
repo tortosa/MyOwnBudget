@@ -5,7 +5,6 @@ namespace Budgets.Domain.UnitTests.Builders
     public class BudgetCategoryBuilder
     {
         private string label;
-        private BudgetCategoryGroup budgetCategoryGroup;
         private Money assignedMoney;
 
         public BudgetCategoryBuilder()
@@ -18,11 +17,7 @@ namespace Budgets.Domain.UnitTests.Builders
             this.label = label;
             return this;
         }
-        public BudgetCategoryBuilder WithBudgetCategoryGroup(BudgetCategoryGroup budgetCategoryGroup)
-        {
-            this.budgetCategoryGroup = budgetCategoryGroup;
-            return this;
-        }
+
         public BudgetCategoryBuilder WithAssignedMoney(Money assignedMoney)
         {
             this.assignedMoney = assignedMoney;
@@ -31,7 +26,7 @@ namespace Budgets.Domain.UnitTests.Builders
 
         public BudgetCategory Build()
         {
-            var budgetCategory = new BudgetCategory(label, budgetCategoryGroup, assignedMoney);
+            var budgetCategory = new BudgetCategory(label, assignedMoney);
             return budgetCategory;
         }
     }

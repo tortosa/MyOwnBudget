@@ -32,15 +32,15 @@ namespace Budgets.Domain.UnitTests
         public void BudgetCategoryShouldHaveABudgetCategoryGroup()
         {
             var expectedLabel = "BudgetCategoryGroup";
-            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
-                .WithLabel(expectedLabel)
-                .Build();
-
             var budgetCategory = new BudgetCategoryBuilder()
-               .WithBudgetCategoryGroup(budgetCategoryGroup)
+               .WithLabel(expectedLabel)
                .Build();
 
-            Assert.Equal(expectedLabel, budgetCategory.BudgetCategoryGroup.Label);
+            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
+                .WithBudgetCategories(budgetCategory)
+                .Build();
+
+            Assert.Equal(expectedLabel, budgetCategoryGroup.BudgetCategories[0].Label);
         }
 
         [Fact]
