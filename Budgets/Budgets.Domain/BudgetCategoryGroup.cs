@@ -10,9 +10,9 @@ namespace Budgets.Domain
 
         public string Label { get; set; }
         public List<BudgetCategory> BudgetCategories { get; }
-        public Money AssignedMoney => GetBalance();
+        public Money AssignedMoney => GetAssignedMoney();
 
-        private Money GetBalance()
+        private Money GetAssignedMoney()
         {
             return BudgetCategories.Sum(budgetCategories => (decimal)budgetCategories.AssignedMoney);
         }
