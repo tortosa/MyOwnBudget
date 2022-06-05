@@ -9,12 +9,14 @@ namespace Budgets.Domain.UnitTests.Builders
         private DateTime date;
         private Payee payee;
         private BudgetCategory budgetCategory;
+        private Account account;
 
         public TransactionBuilder()
         {
             money = 0;
             date = new DateTime(2022, 6, 5);
-            payee = new Payee("defaultLabel");
+            payee = new PayeeBuilder().Build();
+            account = new AccountBuilder().Build();
         }
 
         public TransactionBuilder WithMoney(Money money)
@@ -41,9 +43,15 @@ namespace Budgets.Domain.UnitTests.Builders
             return this;
         }
 
+        public TransactionBuilder WithAccount(Account account)
+        {
+            this.account = account;
+            return this;
+        }
+
         public Transaction Build()
         {
-            var transaction = new Transaction(money, date, payee, budgetCategory);
+            var transaction = new Transaction(money, date, payee, budgetCategory, account);
             return transaction;
         }
     }

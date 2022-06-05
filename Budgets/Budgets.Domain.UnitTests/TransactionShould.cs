@@ -57,5 +57,18 @@ namespace Budgets.Domain.UnitTests
 
             Assert.Equal(expectedLabel, transaction.Payee.Label);
         }
+
+        [Fact]
+        public void TransactionShouldHaveAccount()
+        {
+            var expectedAccount = new AccountBuilder()
+                .Build();
+
+            var transaction = new TransactionBuilder()
+                .WithAccount(expectedAccount)
+                .Build();
+
+            Assert.Equal(expectedAccount, transaction.Account);
+        }
     }
 }

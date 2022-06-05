@@ -11,12 +11,15 @@ namespace Budgets.Domain
         public DateTime Date { get; set; }
         public Payee Payee { get; set; }
         public BudgetCategory BudgetCategory { get; set; }
-        public Transaction(Money money, DateTime date, Payee payee, BudgetCategory budgetCategory)
+        public Account Account { get; set; }
+
+        public Transaction(Money money, DateTime date, Payee payee, BudgetCategory budgetCategory, Account account)
         {
             Money = money;
             Date = date;
             Payee = payee;
             BudgetCategory = budgetCategory;
+            Account = account;
         }
     }
 }
