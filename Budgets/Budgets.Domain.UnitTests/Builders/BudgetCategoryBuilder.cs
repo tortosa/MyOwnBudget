@@ -1,9 +1,12 @@
-﻿namespace Budgets.Domain.UnitTests.Builders
+﻿using NodaMoney;
+
+namespace Budgets.Domain.UnitTests.Builders
 {
     public class BudgetCategoryBuilder
     {
         private string label;
         private BudgetCategoryGroup budgetCategoryGroup;
+        private Money assignedMoney;
 
         public BudgetCategoryBuilder()
         {
@@ -20,10 +23,15 @@
             this.budgetCategoryGroup = budgetCategoryGroup;
             return this;
         }
+        public BudgetCategoryBuilder WithAssignedMoney(Money assignedMoney)
+        {
+            this.assignedMoney = assignedMoney;
+            return this;
+        }
 
         public BudgetCategory Build()
         {
-            var budgetCategory = new BudgetCategory(label, budgetCategoryGroup);
+            var budgetCategory = new BudgetCategory(label, budgetCategoryGroup, assignedMoney);
             return budgetCategory;
         }
     }

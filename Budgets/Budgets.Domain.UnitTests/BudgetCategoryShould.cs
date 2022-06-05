@@ -1,4 +1,5 @@
 using Budgets.Domain.UnitTests.Builders;
+using NodaMoney;
 using Xunit;
 
 namespace Budgets.Domain.UnitTests
@@ -39,7 +40,19 @@ namespace Budgets.Domain.UnitTests
                .WithBudgetCategoryGroup(budgetCategoryGroup)
                .Build();
 
-            Assert.Equal(expectedLabel, budgetCategory.budgetCategoryGroup.Label);
+            Assert.Equal(expectedLabel, budgetCategory.BudgetCategoryGroup.Label);
+        }
+
+        [Fact]
+        public void BudgetCategoryShouldHaveAssignedMoney()
+        {
+            var expectedAssignedMoney = Money.Euro(1250.23);
+
+            var budgetCategory = new BudgetCategoryBuilder()
+                .WithAssignedMoney(expectedAssignedMoney)
+                .Build();
+
+            Assert.Equal(expectedAssignedMoney, budgetCategory.AssignedMoney);
         }
     }
 }

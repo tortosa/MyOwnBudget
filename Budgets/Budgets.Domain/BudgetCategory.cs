@@ -1,18 +1,22 @@
-﻿namespace Budgets.Domain
+﻿using NodaMoney;
+
+namespace Budgets.Domain
 {
     public class BudgetCategory
     {
         protected BudgetCategory() { }
 
         public string Label { get; set; }
-        public BudgetCategoryGroup budgetCategoryGroup { get; set; }
+        public BudgetCategoryGroup BudgetCategoryGroup { get; set; }
+        public Money AssignedMoney { get; set; }         
 
-        public BudgetCategory(string label, BudgetCategoryGroup budgetCategoryGroup)
+        public BudgetCategory(string label, BudgetCategoryGroup budgetCategoryGroup, Money assignedMoney)
         {
             if (string.IsNullOrEmpty(label))
                 label = "Default BudgetCategory label";
             Label = label;
-            this.budgetCategoryGroup = budgetCategoryGroup;
+            this.BudgetCategoryGroup = budgetCategoryGroup;
+            this.AssignedMoney = assignedMoney;
         }
     }
 }
