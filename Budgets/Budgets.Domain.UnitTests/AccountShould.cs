@@ -52,14 +52,11 @@ namespace Budgets.Domain.UnitTests
         [Fact]
         public void AccountDecreaseWhenTransactionIsAssociated()
         {
-            var account = new AccountBuilder()
-               .Build();
-
             var moneyAdded = Money.Euro(12);
 
             var transaction1 = new TransactionBuilder()
                 .WithMoney(moneyAdded)
-                .WithAccount(account)
+                .WithAccount(new AccountBuilder().Build())
                 .Build();
 
             Assert.Equal(moneyAdded, transaction1.Account.Balance);
