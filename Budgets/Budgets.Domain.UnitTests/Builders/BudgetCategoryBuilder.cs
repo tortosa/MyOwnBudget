@@ -7,10 +7,12 @@ namespace Budgets.Domain.UnitTests.Builders
     {
         private string label;
         private List<MoneyAssigned> moneyAssigned;
+        private List<Transaction> transactionsAssociated { get; set; }
 
         public BudgetCategoryBuilder()
         {
             moneyAssigned = new List<MoneyAssigned>();
+            transactionsAssociated = new List<Transaction>();
             label = "defaultLabel";
         }
 
@@ -30,6 +32,7 @@ namespace Budgets.Domain.UnitTests.Builders
         {
             var budgetCategory = new BudgetCategory(label);
             budgetCategory.AddMoney(moneyAssigned.ToArray());
+            budgetCategory.AssociateTransaction(transactionsAssociated.ToArray());
             return budgetCategory;
         }
     }

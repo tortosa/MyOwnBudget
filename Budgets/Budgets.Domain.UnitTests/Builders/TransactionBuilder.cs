@@ -17,6 +17,7 @@ namespace Budgets.Domain.UnitTests.Builders
             date = new DateTime(2022, 6, 5);
             payee = new PayeeBuilder().Build();
             account = new AccountBuilder().Build();
+            budgetCategory = new BudgetCategoryBuilder().Build();
         }
 
         public TransactionBuilder WithMoney(Money money)
