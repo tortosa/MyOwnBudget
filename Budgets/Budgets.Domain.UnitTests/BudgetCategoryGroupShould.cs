@@ -38,39 +38,24 @@ namespace Budgets.Domain.UnitTests
 
             var expectedAssigned = money1 + money2;
 
-            var budgetCategoryDate = new MonthYear(Month.May, 2022);
-            var anotherBudgetCategoryDate = new MonthYear(Month.April, 2022);
-
-            var moneyAssigned1 = new MoneyAssignedBuilder()
-                .WithMoney(money1)
-                .WithMonthYear(budgetCategoryDate)
-                .Build();
-
-            var moneyAssigned2 = new MoneyAssignedBuilder()
-                .WithMoney(money2)
-                .WithMonthYear(budgetCategoryDate)
-                .Build();
-
-            var moneyAssigned3 = new MoneyAssignedBuilder()
-                .WithMoney(money3)
-                .WithMonthYear(anotherBudgetCategoryDate)
-                .Build();
+            var monthYear = new MonthYear(Month.May, 2022);
+            var anotherMonthYear = new MonthYear(Month.April, 2022);
 
             var budgetCategoryAssigned1 = new BudgetCategoryBuilder()
-                .WithAssignedMoney(moneyAssigned1)
+                .WithMoneyAssigned(monthYear, money1)
                 .Build();
             var budgetCategoryAssigned2 = new BudgetCategoryBuilder()
-                .WithAssignedMoney(moneyAssigned2)
+                .WithMoneyAssigned(monthYear, money2)
                 .Build();
             var budgetCategoryAssigned3 = new BudgetCategoryBuilder()
-                .WithAssignedMoney(moneyAssigned3)
+                .WithMoneyAssigned(anotherMonthYear, money3)
                 .Build();
 
             var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
                 .WithBudgetCategories(budgetCategoryAssigned1, budgetCategoryAssigned2, budgetCategoryAssigned3)
                 .Build();
 
-            Assert.Equal(expectedAssigned, budgetCategoryGroup.GetAssignedMoney(budgetCategoryDate));
+            Assert.Equal(expectedAssigned, budgetCategoryGroup.GetAssignedMoney(monthYear));
         }
     }
 }

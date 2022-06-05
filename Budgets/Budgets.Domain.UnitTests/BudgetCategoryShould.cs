@@ -49,20 +49,30 @@ namespace Budgets.Domain.UnitTests
         [Fact]
         public void BudgetCategoryShouldHaveAssignedMoneyAtMonthYear()
         {
-            var budgetCategoryDate = new MonthYear(Month.April, 2030);
+            var monthYear = new MonthYear(Month.April, 2030);
             var expectedMoneyAssigned = Money.Euro(1250.23);
 
-            var expectedAssignedMoney = new MoneyAssignedBuilder()
-                .WithMoney(expectedMoneyAssigned)
-                .WithMonthYear(budgetCategoryDate)
-                .Build();
-
             var budgetCategory = new BudgetCategoryBuilder()
-                .WithAssignedMoney(expectedAssignedMoney)
+                .WithMoneyAssigned(monthYear, expectedMoneyAssigned)
                 .Build();
 
-            Assert.Equal(expectedAssignedMoney.AssignedMoney, budgetCategory.MoneyAssigned.Sum(x => (decimal)x.AssignedMoney));
+            Assert.Equal(expectedMoneyAssigned, budgetCategory.MoneyAssigned.Sum(x => (decimal)x.Value));
         }
+
+        [Fact]
+        public void BudgetCategoryShouldKeepLastRecordOfMoneyAssignedAtSameMonthYear()
+        {
+            var monthYear = new MonthYear(Month.April, 2022);
+            var moneyFirst = Money.Euro(1250.23);
+            var expectedMoney = Money.Euro(3);
+            var budgetCategory = new BudgetCategoryBuilder()
+                .WithMoneyAssigned(new MonthYear(Month.April, 2022), moneyFirst)
+                .WithMoneyAssigned(new MonthYear(Month.April, 2022), expectedMoney)
+                .Build();
+
+            Assert.Equal(expectedMoney, budgetCategory.GetAssignedMoneyAt(monthYear));
+        }
+
 
         // TODO: Pending to improve
         [Fact]

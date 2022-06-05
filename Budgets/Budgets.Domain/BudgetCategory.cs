@@ -10,12 +10,14 @@ namespace Budgets.Domain
         protected BudgetCategory() { }
 
         public string Label { get; set; }
-        public List<MoneyAssigned> MoneyAssigned { get; set; }
-        public List<Transaction> TransactionsAssociated { get; set; }
+
+        public Dictionary<MonthYear, Money> MoneyAssigned { get; }
+
+        public List<Transaction> TransactionsAssociated { get; }
 
         public BudgetCategory(string label)
         {
-            MoneyAssigned = new List<MoneyAssigned>();
+            MoneyAssigned = new Dictionary<MonthYear, Money>();
             TransactionsAssociated = new List<Transaction>();
 
             if (string.IsNullOrEmpty(label))
@@ -23,9 +25,9 @@ namespace Budgets.Domain
             Label = label;
         }
 
-        public void AddMoney(params MoneyAssigned[] moneyAssigned)
+        public void AssignMoney(MonthYear monthYear, Money money)
         {
-            MoneyAssigned.AddRange(moneyAssigned);
+            MoneyAssigned.Add(monthYear, money);
         }
 
         public void AssociateTransaction(params Transaction[] transactionsAssociated)
@@ -36,13 +38,18 @@ namespace Budgets.Domain
         public Money GetAvailableMoneyAt(MonthYear monthYear)
         {
             var transactionsAt = TransactionsAssociated.Where(transaction => monthYear.Year == transaction.Date.Year && (int)monthYear.Month == transaction.Date.Month).ToList();
-            var moneyAssignedAt = MoneyAssigned.Where(assigned => assigned.MonthYear == monthYear).ToList();
+            var moneyAssignedAt = MoneyAssigned.Where(assigned => assigned.Key == monthYear).ToList();
 
-            var availableAt = moneyAssignedAt.Sum(x => (decimal)x.AssignedMoney);
+            var availableAt = moneyAssignedAt.Sum(x => (decimal)x.Value);
 
             return TransactionsAssociated
                 .Where(transaction => monthYear.Year == transaction.Date.Year && (int)monthYear.Month == transaction.Date.Month)
                 .Sum(transaction => (decimal)transaction.Money);
+        }
+
+        public Money GetAssignedMoneyAt(MonthYear monthYear)
+        {
+            return MoneyAssigned[monthYear];
         }
     }
 }

@@ -15,15 +15,15 @@ namespace Budgets.Domain
 
         private Money GetAssignedMoney()
         {
-            return BudgetCategories.Sum(budgetCategories => (decimal)budgetCategories.MoneyAssigned.Sum(x => (decimal)x.AssignedMoney));
+            return BudgetCategories.Sum(budgetCategories => (decimal)budgetCategories.MoneyAssigned.Sum(x => (decimal)x.Value));
         }
 
         public Money GetAssignedMoney(MonthYear monthYear)
         {
             return BudgetCategories
                 .Select(category => category.MoneyAssigned)                
-                .SelectMany(moneyAssigned => moneyAssigned.Where(x => x.MonthYear == monthYear))
-                .Sum(money => (decimal)money.AssignedMoney);
+                .SelectMany(moneyAssigned => moneyAssigned.Where(x => x.Key == monthYear))
+                .Sum(money => (decimal)money.Value);
         }
 
         public BudgetCategoryGroup(string label)
