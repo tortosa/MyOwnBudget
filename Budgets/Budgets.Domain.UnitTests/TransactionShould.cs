@@ -1,4 +1,5 @@
 using Budgets.Domain.UnitTests.Builders;
+using NodaMoney;
 using System;
 using Xunit;
 
@@ -7,15 +8,15 @@ namespace Budgets.Domain.UnitTests
     public class TransactionShould
     {
         [Fact]
-        public void TransactionShouldHaveValue()
+        public void TransactionShouldHaveMoney()
         {
-            var expectedValue = 151.32;
+            var expectedMoney = Money.Euro(6.54);
 
             var transaction = new TransactionBuilder()
-                .WithValue(expectedValue)
+                .WithMoney(expectedMoney)
                 .Build();
 
-            Assert.Equal(expectedValue, transaction.Value);             
+            Assert.Equal(expectedMoney, transaction.Money);             
         }
 
         [Fact]

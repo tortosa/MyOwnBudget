@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NodaMoney;
+using System;
 
 namespace Budgets.Domain
 {
@@ -6,12 +7,12 @@ namespace Budgets.Domain
     {
         protected Transaction() { }
 
-        public double Value { get; set; }
+        public Money Money { get; set; }
         public DateTime Date { get; set; }
 
-        public Transaction(double value, DateTime date)
+        public Transaction(Money money, DateTime date)
         {
-            Value = value;
+            Money = money;
             Date = date;
         }
     }

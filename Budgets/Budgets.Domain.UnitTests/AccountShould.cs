@@ -1,4 +1,5 @@
 using Budgets.Domain.UnitTests.Builders;
+using NodaMoney;
 using Xunit;
 
 namespace Budgets.Domain.UnitTests
@@ -32,13 +33,13 @@ namespace Budgets.Domain.UnitTests
         {
             var sum1 = 182.31;
             var sum2 = -21.43;
-            var expectedBalance = sum1 + sum2;
+            var expectedBalance = Money.Euro(sum1) + Money.Euro(sum2);
 
             var transaction1 = new TransactionBuilder()
-                .WithValue(sum1)
+                .WithMoney(Money.Euro(sum1))
                 .Build();
             var transaction2 = new TransactionBuilder()
-                .WithValue(sum2)
+                .WithMoney(Money.Euro(sum2))
                 .Build();
 
             var account = new AccountBuilder()

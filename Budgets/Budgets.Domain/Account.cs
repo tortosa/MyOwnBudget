@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NodaMoney;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Budgets.Domain
@@ -10,11 +11,11 @@ namespace Budgets.Domain
         public string Label { get; set; }
         public List<Transaction> Transactions { get; set; }
 
-        public double Balance => GetBalance();
+        public Money Balance => GetBalance();
 
-        private double GetBalance()
+        private Money GetBalance()
         {
-            return Transactions.Sum(transaction => transaction.Value);
+            return Transactions.Sum(transaction => (decimal)transaction.Money);
         }
 
         public Account(string label)
