@@ -9,11 +9,14 @@ namespace Budgets.Domain
 
         public Money Money { get; set; }
         public DateTime Date { get; set; }
+        public Payee Payee { get; set; }
+       
 
-        public Transaction(Money money, DateTime date)
+        public Transaction(Money money, DateTime date, Payee payee)
         {
             Money = money;
             Date = date;
+            Payee = payee;
         }
     }
 }

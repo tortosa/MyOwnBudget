@@ -7,11 +7,13 @@ namespace Budgets.Domain.UnitTests.Builders
     {
         private Money money;
         private DateTime date;
+        private Payee payee;
 
         public TransactionBuilder()
         {
             money = 0;
             date = new DateTime(2022, 6, 5);
+            payee = new Payee("defaultLabel");
         }
 
         public TransactionBuilder WithMoney(Money money)
@@ -26,9 +28,15 @@ namespace Budgets.Domain.UnitTests.Builders
             return this;
         }
 
+        public TransactionBuilder WithPayee(Payee payee)
+        {
+            this.payee = payee;
+            return this;
+        }
+
         public Transaction Build()
         {
-            var transaction = new Transaction(money, date);
+            var transaction = new Transaction(money, date, payee);
             return transaction;
         }
     }

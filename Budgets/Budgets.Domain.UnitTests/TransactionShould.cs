@@ -40,5 +40,20 @@ namespace Budgets.Domain.UnitTests
 
             Assert.Equal(expectedDate, transaction.Date);
         }
+
+        [Fact]
+        public void TransactionShouldHavePayee()
+        {
+            var expectedLabel = "Payee";
+            var payee = new PayeeBuilder()
+                .WithLabel(expectedLabel)
+                .Build();
+
+            var transaction = new TransactionBuilder()
+                .WithPayee(payee)
+                .Build();
+
+            Assert.Equal(expectedLabel, transaction.Payee.Label);
+        }
     }
 }
