@@ -8,6 +8,7 @@ namespace Budgets.Domain.UnitTests.Builders
         private Money money;
         private DateTime date;
         private Payee payee;
+        private BudgetCategory budgetCategory;
 
         public TransactionBuilder()
         {
@@ -34,9 +35,15 @@ namespace Budgets.Domain.UnitTests.Builders
             return this;
         }
 
+        public TransactionBuilder WithBudgetCategory(BudgetCategory budgetCategory)
+        {
+            this.budgetCategory = budgetCategory;
+            return this;
+        }
+
         public Transaction Build()
         {
-            var transaction = new Transaction(money, date, payee);
+            var transaction = new Transaction(money, date, payee, budgetCategory);
             return transaction;
         }
     }

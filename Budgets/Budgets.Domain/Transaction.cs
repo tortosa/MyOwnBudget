@@ -10,13 +10,13 @@ namespace Budgets.Domain
         public Money Money { get; set; }
         public DateTime Date { get; set; }
         public Payee Payee { get; set; }
-       
-
-        public Transaction(Money money, DateTime date, Payee payee)
+        public BudgetCategory BudgetCategory { get; set; }
+        public Transaction(Money money, DateTime date, Payee payee, BudgetCategory budgetCategory)
         {
             Money = money;
             Date = date;
             Payee = payee;
+            BudgetCategory = budgetCategory;
         }
     }
 }

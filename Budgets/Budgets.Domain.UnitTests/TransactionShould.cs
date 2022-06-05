@@ -33,12 +33,14 @@ namespace Budgets.Domain.UnitTests
         [Fact]
         public void TransactionShouldHaveBudgetCategory()
         {
-            var expectedDate = new DateTime(2022, 6, 5, 12, 30, 20);
-            var transaction = new TransactionBuilder()
-                .WithDate(expectedDate)
+            var expectedBudgetCategory = new BudgetCategoryBuilder()
                 .Build();
 
-            Assert.Equal(expectedDate, transaction.Date);
+            var transaction = new TransactionBuilder()
+                .WithBudgetCategory(expectedBudgetCategory)
+                .Build();
+
+            Assert.Equal(expectedBudgetCategory, transaction.BudgetCategory);
         }
 
         [Fact]
