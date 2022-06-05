@@ -26,6 +26,13 @@ namespace Budgets.Domain
                 .Sum(money => (decimal)money.Value);
         }
 
+        public Money GetAvailableMoneyAt(MonthYear monthYear)
+        {
+            return BudgetCategories
+                .Select(category => category.GetAvailableMoneyAt(monthYear))
+                .Sum(money => (decimal)money);
+        }
+
         public BudgetCategoryGroup(string label)
         {
             BudgetCategories = new List<BudgetCategory>();
