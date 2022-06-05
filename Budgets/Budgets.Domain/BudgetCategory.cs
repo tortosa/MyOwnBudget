@@ -1,4 +1,5 @@
 ﻿using NodaMoney;
+using System.Collections.Generic;
 
 namespace Budgets.Domain
 {
@@ -7,14 +8,19 @@ namespace Budgets.Domain
         protected BudgetCategory() { }
 
         public string Label { get; set; }
-        public Money AssignedMoney { get; set; }         
+        public List<MoneyAssigned> MoneyAssigned { get; set; }
 
-        public BudgetCategory(string label, Money assignedMoney)
+        public BudgetCategory(string label)
         {
+            MoneyAssigned = new List<MoneyAssigned>();
             if (string.IsNullOrEmpty(label))
                 label = "Default BudgetCategory label";
             Label = label;
-            this.AssignedMoney = assignedMoney;
+        }
+
+        public void AddMoney(params MoneyAssigned[] moneyAssigned)
+        {
+            MoneyAssigned.AddRange(moneyAssigned);
         }
     }
 }

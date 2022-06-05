@@ -1,4 +1,5 @@
 using Budgets.Domain.UnitTests.Builders;
+using Budgets.Domain.ValueObjects;
 using NodaMoney;
 using Xunit;
 
@@ -75,21 +76,38 @@ namespace Budgets.Domain.UnitTests
         [Fact]
         public void BudgetCategoryGroupAssignedMoneyShouldReturnTheAssignedMoneyOfTheirBudgetCategories()
         {
-
             var money1 = Money.Euro(10);
             var money2 = Money.Euro(20);
             var money3 = Money.Euro(-3);
 
             var expectedAssigned = money1 + money2 + money3;
 
+            var monthYear = new MonthYear(Month.May, 2022);
+            var anotherMonthYear = new MonthYear(Month.April, 2022);
+
+            var moneyAssigned1 = new MoneyAssignedBuilder()
+                .WithMoney(money1)
+                .WithMonthYear(monthYear)
+                .Build();
+
+            var moneyAssigned2 = new MoneyAssignedBuilder()
+                .WithMoney(money2)
+                .WithMonthYear(monthYear)
+                .Build();
+
+            var moneyAssigned3 = new MoneyAssignedBuilder()
+                .WithMoney(money3)
+                .WithMonthYear(anotherMonthYear)
+                .Build();
+
             var budgetCategoryAssigned1 = new BudgetCategoryBuilder()
-                .WithAssignedMoney(money1)
+                .WithAssignedMoney(moneyAssigned1)
                 .Build();
             var budgetCategoryAssigned2 = new BudgetCategoryBuilder()
-                .WithAssignedMoney(money2)
+                .WithAssignedMoney(moneyAssigned2)
                 .Build();
             var budgetCategoryAssigned3 = new BudgetCategoryBuilder()
-                .WithAssignedMoney(money3)
+                .WithAssignedMoney(moneyAssigned3)
                 .Build();
 
             var budgetCategoryGroup1 = new BudgetCategoryGroupBuilder()

@@ -1,5 +1,7 @@
 using Budgets.Domain.UnitTests.Builders;
+using Budgets.Domain.ValueObjects;
 using NodaMoney;
+using System.Linq;
 using Xunit;
 
 namespace Budgets.Domain.UnitTests
@@ -44,15 +46,21 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void BudgetCategoryShouldHaveAssignedMoney()
+        public void BudgetCategoryShouldHaveAssignedMoneyInASpecificMoment()
         {
-            var expectedAssignedMoney = Money.Euro(1250.23);
+            var budgetCategoryDate = new MonthYear(Month.April, 2030);
+            var expectedMoneyAssigned = Money.Euro(1250.23);
+
+            var expectedAssignedMoney = new MoneyAssignedBuilder()
+                .WithMoney(expectedMoneyAssigned)
+                .WithMonthYear(budgetCategoryDate)
+                .Build();
 
             var budgetCategory = new BudgetCategoryBuilder()
                 .WithAssignedMoney(expectedAssignedMoney)
                 .Build();
 
-            Assert.Equal(expectedAssignedMoney, budgetCategory.AssignedMoney);
+            Assert.Equal(expectedAssignedMoney.AssignedMoney, budgetCategory.MoneyAssigned.Sum(x => (decimal)x.AssignedMoney));
         }
     }
 }

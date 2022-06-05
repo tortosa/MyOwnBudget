@@ -1,14 +1,16 @@
 ﻿using NodaMoney;
+using System.Collections.Generic;
 
 namespace Budgets.Domain.UnitTests.Builders
 {
     public class BudgetCategoryBuilder
     {
         private string label;
-        private Money assignedMoney;
+        private List<MoneyAssigned> moneyAssigned;
 
         public BudgetCategoryBuilder()
         {
+            moneyAssigned = new List<MoneyAssigned>();
             label = "defaultLabel";
         }
 
@@ -18,15 +20,16 @@ namespace Budgets.Domain.UnitTests.Builders
             return this;
         }
 
-        public BudgetCategoryBuilder WithAssignedMoney(Money assignedMoney)
+        public BudgetCategoryBuilder WithAssignedMoney(params MoneyAssigned[] moneyAssigned)
         {
-            this.assignedMoney = assignedMoney;
+            this.moneyAssigned.AddRange(moneyAssigned);
             return this;
         }
 
         public BudgetCategory Build()
         {
-            var budgetCategory = new BudgetCategory(label, assignedMoney);
+            var budgetCategory = new BudgetCategory(label);
+            budgetCategory.AddMoney(moneyAssigned.ToArray());
             return budgetCategory;
         }
     }
