@@ -7,11 +7,11 @@ namespace Budgets.Domain
     {
         protected Transaction() { }
 
-        public Money Money { get; set; }
-        public DateTime Date { get; set; }
-        public Payee Payee { get; set; }
-        public BudgetCategory BudgetCategory { get;}
-        public Account Account { get; set; }
+        public Money Money { get; }
+        public DateTime Date { get; }
+        public Payee Payee { get; }
+        public BudgetCategory BudgetCategory { get; }
+        public Account Account { get; }
 
         public Transaction(Money money, DateTime date, Payee payee, BudgetCategory budgetCategory, Account account)
         {

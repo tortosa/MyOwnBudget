@@ -56,7 +56,7 @@ namespace Budgets.Domain.UnitTests
                 .WithMoneyAssigned(monthYear, expectedMoneyAssigned)
                 .Build();
 
-            Assert.Equal(expectedMoneyAssigned, budgetCategory.MoneyAssigned.Sum(x => (decimal)x.Value));
+            Assert.Equal(expectedMoneyAssigned, budgetCategory.MoneyAssigned.Sum(moneyAssigned => moneyAssigned.Value.Amount));
         }
 
         [Fact]

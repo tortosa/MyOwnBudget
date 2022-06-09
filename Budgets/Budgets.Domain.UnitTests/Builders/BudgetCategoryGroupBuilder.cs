@@ -5,7 +5,7 @@ namespace Budgets.Domain.UnitTests.Builders
     public class BudgetCategoryGroupBuilder
     {
         private string label;
-        private List<BudgetCategory> budgetCategories { get; set; }
+        private List<BudgetCategory> budgetCategories { get; }
 
         public BudgetCategoryGroupBuilder()
         {

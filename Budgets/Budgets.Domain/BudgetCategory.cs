@@ -9,10 +9,8 @@ namespace Budgets.Domain
     {
         protected BudgetCategory() { }
 
-        public string Label { get; set; }
-
+        public string Label { get; }
         public Dictionary<MonthYear, Money> MoneyAssigned { get; }
-
         public List<Transaction> TransactionsAssociated { get; }
 
         public BudgetCategory(string label)
@@ -46,10 +44,10 @@ namespace Budgets.Domain
             var transactionsAt = TransactionsAssociated.Where(transaction => monthYear.Year == transaction.Date.Year && (int)monthYear.Month == transaction.Date.Month).ToList();
  
             var availableAt =
-                previousMonthMoneyAssigned.Sum(x => (decimal)x.Value) +
-                moneyAssigned.Sum(x => (decimal)x.Value) +
-                previusMonthTransactions.Sum(x => (decimal)x.Money) +
-                transactionsAt.Sum(x => (decimal)x.Money);
+                previousMonthMoneyAssigned.Sum(transaction => transaction.Value.Amount) +
+                moneyAssigned.Sum(transaction => transaction.Value.Amount) +
+                previusMonthTransactions.Sum(transaction => transaction.Money.Amount) +
+                transactionsAt.Sum(transaction => transaction.Money.Amount);
 
             return availableAt;
         }

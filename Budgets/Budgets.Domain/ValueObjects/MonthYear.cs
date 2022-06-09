@@ -31,33 +31,19 @@ namespace Budgets.Domain.ValueObjects
 
         public MonthYear GetPreviousMonth()
         {
-            var month = (int)Month -1;
-            var year = Year;
-            if(month == 0)
-            {
-                month = 12;
-                --year;
-            }
+            var previousMonth = this.Month == Month.January ? Month.December : Month - 1;
+            var validYear = this.Month == Month.January ? Year - 1 : Year;
 
-            return new MonthYear((Month)month, year);
+            return new MonthYear(previousMonth, validYear);
         }
 
         public bool Equals(MonthYear monthYear)
         {
-            if (monthYear is null)
-            {
+            if (monthYear is null || this.GetType() != monthYear.GetType())
                 return false;
-            }
 
             if (ReferenceEquals(this, monthYear))
-            {
                 return true;
-            }
-
-            if (this.GetType() != monthYear.GetType())
-            {
-                return false;
-            }
 
             return (this.Month == monthYear.Month) && (this.Year == monthYear.Year);
         }
@@ -72,7 +58,6 @@ namespace Budgets.Domain.ValueObjects
             {
                 if (op2 is null)
                     return true;
-                
                 return false;
             }
             return op1.Equals(op2);

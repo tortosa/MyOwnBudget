@@ -7,9 +7,9 @@ namespace Budgets.Domain
     public class Budget
     {
         protected Budget() { }
-        public string Label { get; set; }
-        public string DateFormat { get; set; }
-        public Currency Currency;
+        public string Label { get; }
+        public string DateFormat { get; }
+        public Currency Currency { get; }
         public List<BudgetCategoryGroup> BudgetCategoryGroups { get; }
         public Money AssignedMoney => GetAssignedMoney();
 
@@ -31,7 +31,7 @@ namespace Budgets.Domain
 
         private Money GetAssignedMoney()
         {
-            return BudgetCategoryGroups.Sum(transaction => (decimal)transaction.AssignedMoney);
+            return BudgetCategoryGroups.Sum(transaction => transaction.AssignedMoney.Amount);
         }
     }
 }

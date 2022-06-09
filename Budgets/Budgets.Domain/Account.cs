@@ -8,14 +8,13 @@ namespace Budgets.Domain
     {
         protected Account() { }
 
-        public string Label { get; set; }
+        public string Label { get; }
         public List<Transaction> Transactions { get; }
-
         public Money Balance => GetBalance();
 
         private Money GetBalance()
         {
-            return Transactions.Sum(transaction => (decimal)transaction.Money);
+            return Transactions.Sum(transaction => transaction.Money.Amount);
         }
 
         public Account(string label)

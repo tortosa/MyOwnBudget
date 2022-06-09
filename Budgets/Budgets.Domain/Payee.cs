@@ -4,7 +4,7 @@
     {
         protected Payee() { }
 
-        public string Label { get; set; }
+        public string Label { get; }
 
         public Payee(string label)
         {

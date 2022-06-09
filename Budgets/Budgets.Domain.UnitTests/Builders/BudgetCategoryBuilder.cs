@@ -7,8 +7,8 @@ namespace Budgets.Domain.UnitTests.Builders
     public class BudgetCategoryBuilder
     {
         private string label;
-        private Dictionary<MonthYear, Money> moneyAssigned { get; set; }
-        private List<Transaction> transactionsAssociated { get; set; }
+        private Dictionary<MonthYear, Money> moneyAssigned { get; }
+        private List<Transaction> transactionsAssociated { get; }
 
         public BudgetCategoryBuilder()
         {

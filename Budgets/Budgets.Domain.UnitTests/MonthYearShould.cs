@@ -6,6 +6,17 @@ namespace Budgets.Domain.UnitTests
     public class MonthYearShould
     {
         [Fact]
+        public void MonthYearShouldReturnSameThanOperators()
+        {
+            MonthYear monthYearNull = null;
+            var monthYear = new MonthYear(Month.January, 2022);
+            Assert.False(monthYearNull == monthYear);
+            Assert.False(monthYear.Equals(monthYearNull));
+            Assert.True(monthYear.Equals(monthYear));
+            Assert.True(monthYearNull == monthYearNull);
+        }
+
+        [Fact]
         public void MonthYearShouldBeEqualToAnotherInstanceWithSameValues()
         {
             var month = Month.May;

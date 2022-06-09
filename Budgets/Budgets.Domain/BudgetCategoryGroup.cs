@@ -9,28 +9,28 @@ namespace Budgets.Domain
     {
         protected BudgetCategoryGroup() { }
 
-        public string Label { get; set; }
+        public string Label { get; }
         public List<BudgetCategory> BudgetCategories { get; }
         public Money AssignedMoney => GetAssignedMoney();
 
         private Money GetAssignedMoney()
         {
-            return BudgetCategories.Sum(budgetCategories => (decimal)budgetCategories.MoneyAssigned.Sum(x => (decimal)x.Value));
+            return BudgetCategories.Sum(budgetCategory => budgetCategory.MoneyAssigned.Sum(moneyAssigned => moneyAssigned.Value.Amount));
         }
 
         public Money GetAssignedMoney(MonthYear monthYear)
         {
             return BudgetCategories
                 .Select(category => category.MoneyAssigned)                
-                .SelectMany(moneyAssigned => moneyAssigned.Where(x => x.Key == monthYear))
-                .Sum(money => (decimal)money.Value);
+                .SelectMany(moneyAssigned => moneyAssigned.Where(moneyAssigned => moneyAssigned.Key == monthYear))
+                .Sum(money => money.Value.Amount);
         }
 
         public Money GetAvailableMoneyAt(MonthYear monthYear)
         {
             return BudgetCategories
                 .Select(category => category.GetAvailableMoneyAt(monthYear))
-                .Sum(money => (decimal)money);
+                .Sum(money => money.Amount);
         }
 
         public BudgetCategoryGroup(string label)
