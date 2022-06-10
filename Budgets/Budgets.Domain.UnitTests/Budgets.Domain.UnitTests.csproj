@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Budgets.Domain\Budgets.Domain.csproj" />
+    <ProjectReference Include="..\Budgets.Tests.Common\Budgets.Tests.Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,8 @@
 ﻿using NodaMoney;
 using System;
+using Budgets.Domain;
 
-namespace Budgets.Domain.UnitTests.Builders
+namespace Budgets.Tests.Common.Builders
 {
     public class TransactionBuilder
     {

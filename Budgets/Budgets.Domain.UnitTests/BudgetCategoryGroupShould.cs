@@ -1,5 +1,5 @@
-using Budgets.Domain.UnitTests.Builders;
 using Budgets.Domain.ValueObjects;
+using Budgets.Tests.Common.Builders;
 using NodaMoney;
 using System;
 using Xunit;

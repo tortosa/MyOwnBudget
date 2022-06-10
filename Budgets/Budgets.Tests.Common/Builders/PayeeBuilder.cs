@@ -1,4 +1,6 @@
-﻿namespace Budgets.Domain.UnitTests.Builders
+﻿using Budgets.Domain;
+
+namespace Budgets.Tests.Common.Builders
 {
     public class PayeeBuilder
     {

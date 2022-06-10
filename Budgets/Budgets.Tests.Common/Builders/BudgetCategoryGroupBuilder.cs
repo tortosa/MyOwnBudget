@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Budgets.Domain;
+using System.Collections.Generic;
 
-namespace Budgets.Domain.UnitTests.Builders
+namespace Budgets.Tests.Common.Builders
 {
     public class BudgetCategoryGroupBuilder
     {

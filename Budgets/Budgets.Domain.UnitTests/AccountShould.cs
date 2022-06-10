@@ -1,6 +1,6 @@
-using Budgets.Domain.UnitTests.Builders;
 using NodaMoney;
 using Xunit;
+using Budgets.Tests.Common.Builders;
 
 namespace Budgets.Domain.UnitTests
 {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Budgets.Domain;
 
-namespace Budgets.Domain.UnitTests.Builders
+namespace Budgets.Tests.Common.Builders
 {
     public class AccountBuilder
     {
