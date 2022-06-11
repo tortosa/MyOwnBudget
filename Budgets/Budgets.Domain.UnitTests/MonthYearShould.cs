@@ -14,6 +14,8 @@ namespace Budgets.Domain.UnitTests
             Assert.False(monthYear.Equals(monthYearNull));
             Assert.True(monthYear.Equals(monthYear));
             Assert.True(monthYearNull == monthYearNull);
+            Assert.False(monthYear.Equals(new string("test")));
+            Assert.False(monthYear != new MonthYear(Month.January, 2022));
         }
 
         [Fact]
