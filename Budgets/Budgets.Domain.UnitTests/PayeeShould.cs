@@ -1,4 +1,5 @@
 using Budgets.Tests.Common.Builders;
+using FluentAssertions;
 using Xunit;
 
 namespace Budgets.Domain.UnitTests
@@ -13,7 +14,7 @@ namespace Budgets.Domain.UnitTests
                 .WithLabel(expectedLabel)
                 .Build();
 
-            Assert.Equal(expectedLabel, payee.Label);             
+            payee.Label.Should().Be(expectedLabel);             
         }
 
         [Fact]
@@ -24,7 +25,7 @@ namespace Budgets.Domain.UnitTests
                 .WithLabel(expectedLabel)
                 .Build();
 
-            Assert.NotEmpty(payee.Label);
+            payee.Label.Should().NotBeEmpty();
         }
     }
 }

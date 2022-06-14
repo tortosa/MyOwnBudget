@@ -1,5 +1,6 @@
 using Budgets.Tests.Common.Builders;
 using Budgets.Domain.ValueObjects;
+using FluentAssertions;
 using NodaMoney;
 using Xunit;
 
@@ -15,7 +16,7 @@ namespace Budgets.Domain.UnitTests
                 .WithLabel(expectedLabel)
                 .Build();
 
-            Assert.Equal(expectedLabel, budget.Label);
+            budget.Label.Should().Be(expectedLabel);
         }
 
         [Fact]
@@ -26,7 +27,7 @@ namespace Budgets.Domain.UnitTests
                .WithLabel(expectedLabel)
                .Build();
 
-            Assert.NotEmpty(budget.Label);
+            budget.Label.Should().NotBeEmpty();
         }
 
         [Fact]
@@ -37,7 +38,7 @@ namespace Budgets.Domain.UnitTests
                .WithCurrencyCode(expectedCurrencyCode)
                .Build();
 
-            Assert.Equal(expectedCurrencyCode, budget.Currency.Code);
+            budget.Currency.Code.Should().Be(expectedCurrencyCode);
         }
 
         [Fact]
@@ -48,7 +49,7 @@ namespace Budgets.Domain.UnitTests
                .WithDateFormat(expectedDateFormat)
                .Build();
 
-            Assert.Equal(expectedDateFormat, budget.DateFormat);
+            budget.DateFormat.Should().Be(expectedDateFormat);
         }
 
         [Fact]
@@ -69,8 +70,8 @@ namespace Budgets.Domain.UnitTests
                .WithBudgetCategoryGroups(expectedBudgetCategoryGroup1, expectedBudgetCategoryGroup2)
                .Build();
 
-            Assert.Contains(expectedBudgetCategoryGroup1, budget.BudgetCategoryGroups);
-            Assert.Contains(expectedBudgetCategoryGroup2, budget.BudgetCategoryGroups);
+            budget.BudgetCategoryGroups.Should().Contain(expectedBudgetCategoryGroup1);
+            budget.BudgetCategoryGroups.Should().Contain(expectedBudgetCategoryGroup2);
         }
 
         [Fact]
@@ -107,7 +108,7 @@ namespace Budgets.Domain.UnitTests
                .WithBudgetCategoryGroups(budgetCategoryGroup1, budgetCategoryGroup2)
                .Build();
 
-            Assert.Equal(expectedAssigned, budget.AssignedMoney);
+            budget.AssignedMoney.Should().Be(expectedAssigned);
         }
     }
 }

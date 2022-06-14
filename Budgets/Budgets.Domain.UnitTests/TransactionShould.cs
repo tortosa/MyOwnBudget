@@ -2,6 +2,7 @@ using Budgets.Tests.Common.Builders;
 using NodaMoney;
 using System;
 using Xunit;
+using FluentAssertions;
 
 namespace Budgets.Domain.UnitTests
 {
@@ -16,7 +17,7 @@ namespace Budgets.Domain.UnitTests
                 .WithMoney(expectedMoney)
                 .Build();
 
-            Assert.Equal(expectedMoney, transaction.Money);             
+            transaction.Money.Should().Be(expectedMoney);
         }
 
         [Fact]
@@ -27,7 +28,7 @@ namespace Budgets.Domain.UnitTests
                 .WithDate(expectedDate)
                 .Build();
 
-            Assert.Equal(expectedDate, transaction.Date);
+            transaction.Date.Should().Be(expectedDate);
         }
 
         [Fact]
@@ -40,7 +41,7 @@ namespace Budgets.Domain.UnitTests
                 .WithBudgetCategory(expectedBudgetCategory)
                 .Build();
 
-            Assert.Equal(expectedBudgetCategory, transaction.BudgetCategory);
+            transaction.BudgetCategory.Should().Be(expectedBudgetCategory);
         }
 
         [Fact]
@@ -55,7 +56,7 @@ namespace Budgets.Domain.UnitTests
                 .WithPayee(payee)
                 .Build();
 
-            Assert.Equal(expectedLabel, transaction.Payee.Label);
+            transaction.Payee.Label.Should().Be(expectedLabel);
         }
 
         [Fact]
@@ -68,7 +69,7 @@ namespace Budgets.Domain.UnitTests
                 .WithAccount(expectedAccount)
                 .Build();
 
-            Assert.Equal(expectedAccount, transaction.Account);
+            transaction.Account.Should().Be(expectedAccount);
         }
     }
 }
