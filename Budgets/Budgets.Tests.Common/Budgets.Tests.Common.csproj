@@ -4,6 +4,9 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.7.0" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Budgets.Domain\Budgets.Domain.csproj" />
   </ItemGroup>
 </Project>
