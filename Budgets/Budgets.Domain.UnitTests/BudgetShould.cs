@@ -8,6 +8,17 @@ namespace Budgets.Domain.UnitTests
     public class BudgetShould
     {
         [Fact]
+        public void BudgetShouldHaveId()
+        {
+            var expectedId = 1;
+            var budget = new BudgetBuilder()
+                .WithId(expectedId)
+                .Build();
+
+            Assert.Equal(expectedId, budget.Id);
+        }
+
+        [Fact]
         public void BudgetShouldHaveLabel()
         {
             var expectedLabel = "account name";

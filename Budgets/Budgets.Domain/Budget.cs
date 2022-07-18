@@ -7,18 +7,20 @@ namespace Budgets.Domain
     public class Budget
     {
         protected Budget() { }
+        public int Id { get; }
         public string Label { get; }
         public string DateFormat { get; }
         public Currency Currency { get; }
         public List<BudgetCategoryGroup> BudgetCategoryGroups { get; }
         public Money AssignedMoney => GetAssignedMoney();
 
-        public Budget(string label, string currencyCode, string dateFormat)
+        public Budget(int id, string label, string currencyCode, string dateFormat)
         {
             BudgetCategoryGroups = new List<BudgetCategoryGroup>();
 
             if (string.IsNullOrEmpty(label))
                 label = "Default account label";
+            Id = id;
             Label = label;
             Currency = Currency.FromCode(currencyCode);
             DateFormat = dateFormat;
