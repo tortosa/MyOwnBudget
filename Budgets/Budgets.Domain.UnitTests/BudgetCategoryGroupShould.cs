@@ -8,6 +8,18 @@ namespace Budgets.Domain.UnitTests
 {
     public class BudgetCategoryGroupShould
     {
+
+        [Fact]
+        public void BudgetCategoryGroupShouldHaveId()
+        {
+            var expectedId = 1;
+            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
+                .WithId(expectedId)
+                .Build();
+
+            Assert.Equal(expectedId, budgetCategoryGroup.Id);
+        }
+
         [Fact]
         public void BudgetCategoryGroupShouldHaveLabel()
         {
