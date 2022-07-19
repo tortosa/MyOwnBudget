@@ -56,6 +56,8 @@ namespace Budgets.Domain
 
         public Money GetAssignedMoneyAt(MonthYear monthYear)
         {
+            if(!MoneyAssigned.ContainsKey(monthYear))
+                return 0;
             return MoneyAssigned[monthYear];
         }
     }

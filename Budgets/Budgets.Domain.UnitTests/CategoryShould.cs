@@ -121,12 +121,22 @@ namespace Budgets.Domain.UnitTests
                 .WithDate(new DateTime(monthYearJune.Year, (int)monthYearJune.Month, 20, 10, 00, 00))
                 .Build();
 
-            var account = new AccountBuilder()
-                .WithTransactions(transactionMay1, transactionMay2, transactionJune)
-                .Build();
+            var budget = new BudgetBuilder().Build();
+            budget.AddTransaction(transactionMay1, transactionMay2, transactionJune);
 
             var expectedMoneyAvailableInJune = moneyAssignedInJune + moneyAssignedInMay + moneyTransactionInMay1 + moneyTransactionInMay2 + moneyTransactionInJune;
             Assert.Equal(expectedMoneyAvailableInJune, category.GetAvailableMoneyAt(monthYearJune));
+        }
+
+         [Fact]
+        public void CategoryShouldReturnZeroMoneyAssignedWhenNothingAssigned()
+        {
+            var monthYear = new MonthYear(Month.April, 2022);
+            var expectedMoney = Money.Euro(0);
+            var category = new CategoryBuilder()
+                .Build();
+
+            Assert.Equal(expectedMoney, category.GetAssignedMoneyAt(monthYear));
         }
     }
 }
