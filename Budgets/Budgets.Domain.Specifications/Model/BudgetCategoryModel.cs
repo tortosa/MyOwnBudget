@@ -2,9 +2,8 @@
 {
     public class BudgetCategoryModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
+        public int CategoryGroupId { get; set; }
         public string Label { get; set; }
-        public string DateFormat { get; set; }
-        public string Currency { get; set; }
     }
 }
