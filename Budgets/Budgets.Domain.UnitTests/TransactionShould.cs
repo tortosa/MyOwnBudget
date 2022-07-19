@@ -8,6 +8,17 @@ namespace Budgets.Domain.UnitTests
     public class TransactionShould
     {
         [Fact]
+        public void PayeeTransactionShouldHaveId()
+        {
+            var expectedId = 1;
+            var transaction = new TransactionBuilder()
+                .WithId(expectedId)
+                .Build();
+
+            Assert.Equal(expectedId, transaction.Id);
+        }
+
+        [Fact]
         public void TransactionShouldHaveMoney()
         {
             var expectedMoney = Money.Euro(6.54);
