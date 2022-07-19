@@ -7,6 +7,17 @@ namespace Budgets.Domain.UnitTests
 {
     public class AccountShould
     {
+         [Fact]
+        public void AccountShouldHaveId()
+        {
+            var expectedId = 1;
+            var account = new AccountBuilder()
+                .WithId(expectedId)
+                .Build();
+
+            Assert.Equal(expectedId, account.Id);             
+        }
+
         [Fact]
         public void AccountShouldHaveLabel()
         {
@@ -51,7 +62,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void AccountDecreaseWhenTransactionIsAssociated()
+        public void AccountDecreaseWhenTransactionIsAdded()
         {
             var moneyAdded = Money.Euro(12);
 
@@ -60,6 +71,8 @@ namespace Budgets.Domain.UnitTests
                 .WithAccount(new AccountBuilder().Build())
                 .Build();
 
+            var budget = new BudgetBuilder().Build();
+            budget.AddTransaction(transaction1);
             transaction1.Account.Balance.Should().Be(moneyAdded);
         }
     }

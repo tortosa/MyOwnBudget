@@ -9,6 +9,17 @@ namespace Budgets.Domain.UnitTests
     public class BudgetShould
     {
         [Fact]
+        public void BudgetShouldHaveId()
+        {
+            var expectedId = 1;
+            var budget = new BudgetBuilder()
+                .WithId(expectedId)
+                .Build();
+
+            Assert.Equal(expectedId, budget.Id);
+        }
+
+        [Fact]
         public void BudgetShouldHaveLabel()
         {
             var expectedLabel = "account name";
@@ -53,29 +64,29 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void BudgetShouldHaveBudgetCategoryGroups()
+        public void BudgetShouldHaveGroupCategories()
         {
-            var budgetCategoryGroupLabel1 = "Group1";
-            var budgetCategoryGroupLabel2 = "Group2";
+            var GroupCategoryLabel1 = "Group1";
+            var GroupCategoryLabel2 = "Group2";
 
-            var expectedBudgetCategoryGroup1 = new BudgetCategoryGroupBuilder()
-                .WithLabel(budgetCategoryGroupLabel1)
+            var expectedGroupCategory1 = new GroupCategoryBuilder()
+                .WithLabel(GroupCategoryLabel1)
                 .Build();
 
-            var expectedBudgetCategoryGroup2 = new BudgetCategoryGroupBuilder()
-               .WithLabel(budgetCategoryGroupLabel2)
+            var expectedGroupCategory2 = new GroupCategoryBuilder()
+               .WithLabel(GroupCategoryLabel2)
                .Build();
 
             var budget = new BudgetBuilder()
-               .WithBudgetCategoryGroups(expectedBudgetCategoryGroup1, expectedBudgetCategoryGroup2)
+               .WithGroupCategories(expectedGroupCategory1, expectedGroupCategory2)
                .Build();
 
-            budget.BudgetCategoryGroups.Should().Contain(expectedBudgetCategoryGroup1);
-            budget.BudgetCategoryGroups.Should().Contain(expectedBudgetCategoryGroup2);
+            budget.GroupCategories.Should().Contain(expectedGroupCategory1);
+            budget.GroupCategories.Should().Contain(expectedGroupCategory2);
         }
 
         [Fact]
-        public void BudgetCategoryGroupAssignedMoneyShouldReturnTheAssignedMoneyOfTheirBudgetCategories()
+        public void GroupCategoryAssignedMoneyShouldReturnTheAssignedMoneyOfTheirCategories()
         {
             var money1 = Money.Euro(10);
             var money2 = Money.Euro(20);
@@ -86,26 +97,26 @@ namespace Budgets.Domain.UnitTests
             var monthYear = new MonthYear(Month.May, 2022);
             var anotherMonthYear = new MonthYear(Month.April, 2022);
 
-            var budgetCategoryAssigned1 = new BudgetCategoryBuilder()
+            var categoryAssigned1 = new CategoryBuilder()
                 .WithMoneyAssigned(monthYear, money1)
                 .Build();
-            var budgetCategoryAssigned2 = new BudgetCategoryBuilder()
+            var categoryAssigned2 = new CategoryBuilder()
                 .WithMoneyAssigned(monthYear, money2)
                 .Build();
-            var budgetCategoryAssigned3 = new BudgetCategoryBuilder()
+            var categoryAssigned3 = new CategoryBuilder()
                 .WithMoneyAssigned(anotherMonthYear, money3)
                 .Build();
 
-            var budgetCategoryGroup1 = new BudgetCategoryGroupBuilder()
-                .WithBudgetCategories(budgetCategoryAssigned1, budgetCategoryAssigned2)
+            var GroupCategory1 = new GroupCategoryBuilder()
+                .WithCategories(categoryAssigned1, categoryAssigned2)
                 .Build();
 
-            var budgetCategoryGroup2 = new BudgetCategoryGroupBuilder()
-                .WithBudgetCategories(budgetCategoryAssigned3)
+            var GroupCategory2 = new GroupCategoryBuilder()
+                .WithCategories(categoryAssigned3)
                 .Build();
 
             var budget = new BudgetBuilder()
-               .WithBudgetCategoryGroups(budgetCategoryGroup1, budgetCategoryGroup2)
+               .WithGroupCategories(GroupCategory1, GroupCategory2)
                .Build();
 
             budget.AssignedMoney.Should().Be(expectedAssigned);

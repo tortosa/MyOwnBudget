@@ -6,54 +6,62 @@ namespace Budgets.Tests.Common.Builders
 {
     public class TransactionBuilder
     {
-        private Money money;
-        private DateTime date;
-        private Payee payee;
-        private BudgetCategory budgetCategory;
-        private Account account;
+        public int Id { get; private set; }
+        public Money Money { get; private set; }
+        public DateTime Date { get; private set; }
+        public Payee Payee { get; private set; }
+        public Category Category { get; private set; }
+        public Account Account { get; private set; }
 
         public TransactionBuilder()
         {
-            money = 0;
-            date = new DateTime(2022, 6, 5);
-            payee = new PayeeBuilder().Build();
-            account = new AccountBuilder().Build();
-            budgetCategory = new BudgetCategoryBuilder().Build();
+            Id = 0;
+            Money = 0;
+            Date = new DateTime(2022, 6, 5);
+            Payee = new PayeeBuilder().Build();
+            Account = new AccountBuilder().Build();
+            Category = new CategoryBuilder().Build();
+        }
+
+        public TransactionBuilder WithId(int id)
+        {
+            this.Id = id;
+            return this;
         }
 
         public TransactionBuilder WithMoney(Money money)
         {
-            this.money = money;
+            this.Money = money;
             return this;
         }
 
         public TransactionBuilder WithDate(DateTime date)
         {
-            this.date = date;
+            this.Date = date;
             return this;
         }
 
         public TransactionBuilder WithPayee(Payee payee)
         {
-            this.payee = payee;
+            this.Payee = payee;
             return this;
         }
 
-        public TransactionBuilder WithBudgetCategory(BudgetCategory budgetCategory)
+        public TransactionBuilder WithCategory(Category category)
         {
-            this.budgetCategory = budgetCategory;
+            this.Category = category;
             return this;
         }
 
         public TransactionBuilder WithAccount(Account account)
         {
-            this.account = account;
+            this.Account = account;
             return this;
         }
 
         public Transaction Build()
         {
-            var transaction = new Transaction(money, date, payee, budgetCategory, account);
+            var transaction = new Transaction(Id, Money, Date, Payee, Category, Account);
             return transaction;
         }
     }

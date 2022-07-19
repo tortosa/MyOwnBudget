@@ -1,50 +1,70 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Budgets.Domain;
 
 namespace Budgets.Tests.Common.Builders
 {
     public class BudgetBuilder
     {
-        private string label;
-        private string currencyCode;
-        private string dateFormat;
-        private List<BudgetCategoryGroup> budgetCategoryGroups;
+        public int Id { get; private set; }
+        public string Label { get; private set; }
+        public string CurrencyCode { get; private set; }
+        public string DateFormat { get; private set; }
+        public List<GroupCategory> GroupCategories { get; private set; }
+        public List<GroupCategoryBuilder> GroupCategoryBuilders { get; private set; }
 
         public BudgetBuilder()
         {
-            label = "defaultLabel";
-            currencyCode = "EUR";
-            budgetCategoryGroups = new List<BudgetCategoryGroup>();
+            Id = 0;
+            Label = "defaultLabel";
+            CurrencyCode = "EUR";
+            GroupCategories = new List<GroupCategory>();
+            GroupCategoryBuilders = new List<GroupCategoryBuilder>();
+        }
+
+        public BudgetBuilder WithId(int id)
+        {
+            this.Id = id;
+            return this;
         }
 
         public BudgetBuilder WithLabel(string label)
         {
-            this.label = label;
+            this.Label = label;
             return this;
         }
 
         public BudgetBuilder WithCurrencyCode(string currencyCode)
         {
-            this.currencyCode = currencyCode;
+            this.CurrencyCode = currencyCode;
             return this;
         }
 
         public BudgetBuilder WithDateFormat(string dateFormat)
         {
-            this.dateFormat = dateFormat;
+            this.DateFormat = dateFormat;
             return this;
         }
 
-        public BudgetBuilder WithBudgetCategoryGroups(params BudgetCategoryGroup[] budgetCategoryGroups)
+        public BudgetBuilder WithGroupCategories(params GroupCategory[] GroupCategories)
         {
-            this.budgetCategoryGroups.AddRange(budgetCategoryGroups);
+            this.GroupCategories.AddRange(GroupCategories);
+            return this;
+        }
+
+        public BudgetBuilder WithGroupCategories(params GroupCategoryBuilder[] GroupCategoryBuilders)
+        {
+            this.GroupCategoryBuilders.AddRange(GroupCategoryBuilders);
             return this;
         }
 
         public Budget Build()
         {
-            var budget = new Budget(label, currencyCode, dateFormat);
-            budget.AddBudgetCategoryGroups(budgetCategoryGroups.ToArray());
+            var budget = new Budget(Id, Label, CurrencyCode, DateFormat);
+            var categoryGroupBuilders = GroupCategoryBuilders.Select(builder => builder.Build());
+            var categoryGroups = GroupCategories.Concat(categoryGroupBuilders);
+
+            budget.AddGroupCategories(categoryGroups.ToArray());
             return budget;
         }
     }

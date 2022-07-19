@@ -9,6 +9,17 @@ namespace Budgets.Domain.UnitTests
     public class TransactionShould
     {
         [Fact]
+        public void PayeeTransactionShouldHaveId()
+        {
+            var expectedId = 1;
+            var transaction = new TransactionBuilder()
+                .WithId(expectedId)
+                .Build();
+
+            transaction.Id.Should().Be(expectedId);
+        }
+
+        [Fact]
         public void TransactionShouldHaveMoney()
         {
             var expectedMoney = Money.Euro(6.54);
@@ -32,16 +43,16 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void TransactionShouldHaveBudgetCategory()
+        public void TransactionShouldHaveCategory()
         {
-            var expectedBudgetCategory = new BudgetCategoryBuilder()
+            var expectedCategory = new CategoryBuilder()
                 .Build();
 
             var transaction = new TransactionBuilder()
-                .WithBudgetCategory(expectedBudgetCategory)
+                .WithCategory(expectedCategory)
                 .Build();
 
-            transaction.BudgetCategory.Should().Be(expectedBudgetCategory);
+            transaction.Category.Should().Be(expectedCategory);
         }
 
         [Fact]

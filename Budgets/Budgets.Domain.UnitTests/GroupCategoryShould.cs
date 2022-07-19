@@ -7,32 +7,44 @@ using Xunit;
 
 namespace Budgets.Domain.UnitTests
 {
-    public class BudgetCategoryGroupShould
+    public class GroupCategoryShould
     {
+
         [Fact]
-        public void BudgetCategoryGroupShouldHaveLabel()
+        public void GroupCategoryShouldHaveId()
         {
-            var expectedLabel = "budgetCategoryGroup name";
-            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
-                .WithLabel(expectedLabel)
+            var expectedId = 1;
+            var GroupCategory = new GroupCategoryBuilder()
+                .WithId(expectedId)
                 .Build();
 
-            budgetCategoryGroup.Label.Should().Be(expectedLabel);
+            Assert.Equal(expectedId, GroupCategory.Id);
         }
 
         [Fact]
-        public void BudgetCategoryGroupShouldNotAllowEmptyLabel()
+        public void GroupCategoryShouldHaveLabel()
+        {
+            var expectedLabel = "GroupCategory name";
+            var groupCategory = new GroupCategoryBuilder()
+                .WithLabel(expectedLabel)
+                .Build();
+
+            groupCategory.Label.Should().Be(expectedLabel);
+        }
+
+        [Fact]
+        public void GroupCategoryShouldNotAllowEmptyLabel()
         {
             var expectedLabel = string.Empty;
-            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
+            var groupCategory = new GroupCategoryBuilder()
                 .WithLabel(expectedLabel)
                 .Build();
 
-            budgetCategoryGroup.Label.Should().NotBeEmpty();
+            groupCategory.Label.Should().NotBeEmpty();
         }
 
         [Fact]
-        public void BudgetCategoryGroupAssignedMoneyShouldReturnTheBalanceOfTheirBudgetCategories()
+        public void GroupCategoryAssignedMoneyShouldReturnTheBalanceOfTheirCategories()
         {
             var money1 = Money.Euro(10);
             var money2 = Money.Euro(20);
@@ -43,25 +55,25 @@ namespace Budgets.Domain.UnitTests
             var monthYear = new MonthYear(Month.May, 2022);
             var anotherMonthYear = new MonthYear(Month.April, 2022);
 
-            var budgetCategoryAssigned1 = new BudgetCategoryBuilder()
+            var categoryAssigned1 = new CategoryBuilder()
                 .WithMoneyAssigned(monthYear, money1)
                 .Build();
-            var budgetCategoryAssigned2 = new BudgetCategoryBuilder()
+            var categoryAssigned2 = new CategoryBuilder()
                 .WithMoneyAssigned(monthYear, money2)
                 .Build();
-            var budgetCategoryAssigned3 = new BudgetCategoryBuilder()
+            var categoryAssigned3 = new CategoryBuilder()
                 .WithMoneyAssigned(anotherMonthYear, money3)
                 .Build();
 
-            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
-                .WithBudgetCategories(budgetCategoryAssigned1, budgetCategoryAssigned2, budgetCategoryAssigned3)
+            var groupCategory = new GroupCategoryBuilder()
+                .WithCategories(categoryAssigned1, categoryAssigned2, categoryAssigned3)
                 .Build();
 
-            budgetCategoryGroup.GetAssignedMoney(monthYear).Should().Be(expectedAssigned);
+             groupCategory.GetAssignedMoney(monthYear).Should().Be(expectedAssigned);
         }
 
         [Fact]
-        public void BudgetCategoryGroupAvaiableMoneyShouldReturnTheBalanceOfTheirBudgetCategories()
+        public void GroupCategoryAvailableMoneyShouldReturnTheBalanceOfTheirCategories()
         {
             var monthYearMay = new MonthYear(Month.May, 2022);
             var monthYearJune = new MonthYear(Month.June, 2022);
@@ -74,42 +86,41 @@ namespace Budgets.Domain.UnitTests
 
             var moneyTransactionInJune = Money.Euro(-20);
 
-            var budgetCategoryMay = new BudgetCategoryBuilder()
+            var categoryMay = new CategoryBuilder()
                 .WithMoneyAssigned(monthYearMay, moneyAssignedInMay)
                 .Build();
 
-            var budgetCategoryJune = new BudgetCategoryBuilder()
+            var categoryJune = new CategoryBuilder()
                 .WithMoneyAssigned(monthYearJune, moneyAssignedInJune)
                 .Build();
 
             var transactionMay1 = new TransactionBuilder()
-                .WithBudgetCategory(budgetCategoryMay)
+                .WithCategory(categoryMay)
                 .WithMoney(moneyTransactionInMay1)
                 .WithDate(new DateTime(monthYearMay.Year, (int)monthYearMay.Month, 16, 10, 00, 00))
                 .Build();
 
             var transactionMay2 = new TransactionBuilder()
-                .WithBudgetCategory(budgetCategoryMay)
+                .WithCategory(categoryMay)
                 .WithMoney(moneyTransactionInMay2)
                 .WithDate(new DateTime(monthYearMay.Year, (int)monthYearMay.Month, 20, 10, 00, 00))
                 .Build();
 
             var transactionJune = new TransactionBuilder()
-                .WithBudgetCategory(budgetCategoryJune)
+                .WithCategory(categoryJune)
                 .WithMoney(moneyTransactionInJune)
                 .WithDate(new DateTime(monthYearJune.Year, (int)monthYearJune.Month, 20, 10, 00, 00))
                 .Build();
 
-            var account = new AccountBuilder()
-                .WithTransactions(transactionMay1, transactionMay2, transactionJune)
+            var GroupCategory = new GroupCategoryBuilder()
+                .WithCategories(categoryMay, categoryJune)
                 .Build();
 
-            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
-                .WithBudgetCategories(budgetCategoryMay, budgetCategoryJune)
-                .Build();
+            var budget = new BudgetBuilder().Build();
+            budget.AddTransaction(transactionMay1, transactionMay2, transactionJune);
 
             var expectedMoneyAvailableInJune = moneyAssignedInJune + moneyAssignedInMay + moneyTransactionInMay1 + moneyTransactionInMay2 + moneyTransactionInJune;
-            budgetCategoryGroup.GetAvailableMoneyAt(monthYearJune).Should().Be(expectedMoneyAvailableInJune);
+            GroupCategory.GetAvailableMoneyAt(monthYearJune).Should().Be(expectedMoneyAvailableInJune);
         }
     }
 }

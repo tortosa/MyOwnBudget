@@ -5,22 +5,33 @@ using System.Linq;
 
 namespace Budgets.Domain
 {
-    public class BudgetCategoryGroup
+    public class GroupCategory
     {
-        protected BudgetCategoryGroup() { }
+        protected GroupCategory() { }
 
+        public int Id { get; }
         public string Label { get; }
-        public List<BudgetCategory> BudgetCategories { get; }
+        public List<Category> Categories { get; }
         public Money AssignedMoney => GetAssignedMoney();
+
+        public GroupCategory(int id, string label)
+        {
+            Categories = new List<Category>();
+
+            if (string.IsNullOrEmpty(label))
+                label = "Default GroupCategory label";
+            Label = label;
+            Id = id;
+        }
 
         private Money GetAssignedMoney()
         {
-            return BudgetCategories.Sum(budgetCategory => budgetCategory.MoneyAssigned.Sum(moneyAssigned => moneyAssigned.Value.Amount));
+            return Categories.Sum(category => category.MoneyAssigned.Sum(moneyAssigned => moneyAssigned.Value.Amount));
         }
 
         public Money GetAssignedMoney(MonthYear monthYear)
         {
-            return BudgetCategories
+            return Categories
                 .Select(category => category.MoneyAssigned)                
                 .SelectMany(moneyAssigned => moneyAssigned.Where(moneyAssigned => moneyAssigned.Key == monthYear))
                 .Sum(money => money.Value.Amount);
@@ -28,23 +39,14 @@ namespace Budgets.Domain
 
         public Money GetAvailableMoneyAt(MonthYear monthYear)
         {
-            return BudgetCategories
+            return Categories
                 .Select(category => category.GetAvailableMoneyAt(monthYear))
                 .Sum(money => money.Amount);
         }
 
-        public BudgetCategoryGroup(string label)
+        public void AddCategories(params Category[] categories)
         {
-            BudgetCategories = new List<BudgetCategory>();
-
-            if (string.IsNullOrEmpty(label))
-                label = "Default BudgetCategoryGroup label";
-            Label = label;
-        }
-
-        public void AddBudgetCategories(params BudgetCategory[] budgetCategories)
-        {
-            BudgetCategories.AddRange(budgetCategories);
+            Categories.AddRange(categories);
         }
     }
 }

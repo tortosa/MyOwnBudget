@@ -11,11 +11,12 @@ namespace Budgets.Domain.UnitTests
         {
             MonthYear monthYearNull = null;
             var monthYear = new MonthYear(Month.January, 2022);
-
             (monthYearNull == monthYear).Should().BeFalse();
             (monthYear.Equals(monthYearNull)).Should().BeFalse();
             monthYear.Equals(monthYear).Should().BeTrue();
             (monthYearNull == monthYearNull).Should().BeTrue();
+            monthYear.Equals(new string("test")).Should().BeFalse();
+            (monthYear != new MonthYear(Month.January, 2022)).Should().BeFalse();
         }
 
         [Fact]

@@ -5,43 +5,59 @@ using Budgets.Domain;
 
 namespace Budgets.Tests.Common.Builders
 {
-    public class BudgetCategoryBuilder
+    public class CategoryBuilder
     {
-        private string label;
-        private Dictionary<MonthYear, Money> moneyAssigned { get; }
-        private List<Transaction> transactionsAssociated { get; }
+        public int Id { get; private set; }
+        public int GroupCategoryId { get; private set; }
+        public string Label  { get; private set; }
+        public Dictionary<MonthYear, Money> MoneyAssigned  { get; private set; }
+        public List<Transaction> TransactionsAssociated  { get; private set; }
 
-        public BudgetCategoryBuilder()
+        public CategoryBuilder()
         {
-            moneyAssigned = new Dictionary<MonthYear, Money>();
-            transactionsAssociated = new List<Transaction>();
-            label = "defaultLabel";
+            Id = 0;
+            GroupCategoryId = 0;
+            MoneyAssigned = new Dictionary<MonthYear, Money>();
+            TransactionsAssociated = new List<Transaction>();
+            Label = "defaultLabel";
         }
 
-        public BudgetCategoryBuilder WithLabel(string label)
+        public CategoryBuilder WithId(int id)
         {
-            this.label = label;
+            this.Id = id;
             return this;
         }
 
-        public BudgetCategoryBuilder WithMoneyAssigned(MonthYear monthYear, Money money)
+        public CategoryBuilder WithGroupCategoryId(int groupCategoryId)
         {
-            if(moneyAssigned.ContainsKey(monthYear))
-                moneyAssigned.Remove(monthYear);
-            this.moneyAssigned.Add(monthYear, money);
+            this.GroupCategoryId = groupCategoryId;
             return this;
         }
 
-        public BudgetCategory Build()
+        public CategoryBuilder WithLabel(string label)
         {
-            var budgetCategory = new BudgetCategory(label);
-            foreach(var dict in moneyAssigned)
+            this.Label = label;
+            return this;
+        }
+
+        public CategoryBuilder WithMoneyAssigned(MonthYear monthYear, Money money)
+        {
+            if(MoneyAssigned.ContainsKey(monthYear))
+                MoneyAssigned.Remove(monthYear);
+            this.MoneyAssigned.Add(monthYear, money);
+            return this;
+        }
+
+        public Category Build()
+        {
+            var category = new Category(Id, Label);
+            foreach(var dict in MoneyAssigned)
             {
-                budgetCategory.AssignMoney(dict.Key, dict.Value);
+                category.AssignMoney(dict.Key, dict.Value);
             }
 
-            budgetCategory.AssociateTransaction(transactionsAssociated.ToArray());
-            return budgetCategory;
+            category.AssociateTransaction(TransactionsAssociated.ToArray());
+            return category;
         }
     }
 }
