@@ -26,6 +26,20 @@ namespace Budgets.Domain
             DateFormat = dateFormat;
         }
 
+        private void AddTransaction(Transaction transaction)
+        {
+            transaction.Account.AddTransactions(transaction);
+            transaction.Category.AssociateTransaction(transaction);
+        }
+
+        public void AddTransaction(params Transaction[] transactions)
+        {
+            foreach (var transaction in transactions)
+            {
+                AddTransaction(transaction);
+            }
+        }
+
         public void AddGroupCategories(params GroupCategory[] GroupCategories)
         {
             this.GroupCategories.AddRange(GroupCategories);

@@ -61,7 +61,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void AccountDecreaseWhenTransactionIsAssociated()
+        public void AccountDecreaseWhenTransactionIsAdded()
         {
             var moneyAdded = Money.Euro(12);
 
@@ -69,6 +69,9 @@ namespace Budgets.Domain.UnitTests
                 .WithMoney(moneyAdded)
                 .WithAccount(new AccountBuilder().Build())
                 .Build();
+
+            var budget = new BudgetBuilder().Build();
+            budget.AddTransaction(transaction1);
 
             Assert.Equal(moneyAdded, transaction1.Account.Balance);
         }

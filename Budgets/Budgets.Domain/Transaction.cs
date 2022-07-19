@@ -22,9 +22,6 @@ namespace Budgets.Domain
             Payee = payee;
             Category = category;
             Account = account;
-
-            Account.AddTransactions(this);
-            Category.AssociateTransaction(this);
         }
     }
 }
