@@ -42,16 +42,16 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void TransactionShouldHaveBudgetCategory()
+        public void TransactionShouldHaveCategory()
         {
-            var expectedBudgetCategory = new CategoryBuilder()
+            var expectedCategory = new CategoryBuilder()
                 .Build();
 
             var transaction = new TransactionBuilder()
-                .WithCategory(expectedBudgetCategory)
+                .WithCategory(expectedCategory)
                 .Build();
 
-            Assert.Equal(expectedBudgetCategory, transaction.Category);
+            Assert.Equal(expectedCategory, transaction.Category);
         }
 
         [Fact]

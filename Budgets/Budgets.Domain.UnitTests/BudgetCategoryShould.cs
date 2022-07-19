@@ -51,10 +51,10 @@ namespace Budgets.Domain.UnitTests
                .Build();
 
             var groupCategory = new GroupCategoryBuilder()
-                .WithBudgetCategories(category)
+                .WithCategories(category)
                 .Build();
 
-            Assert.Equal(expectedLabel, groupCategory.BudgetCategories[0].Label);
+            Assert.Equal(expectedLabel, groupCategory.Categories[0].Label);
         }
 
         [Fact]

@@ -32,7 +32,7 @@ namespace Budgets.Domain.Specifications.Steps
             foreach (var categoryGroupBuilder in categoryGroupContext.GroupCategories)
             {
                 var categoriesPerGroup = categoryContext.Categories.Where(x =>x.GroupCategoryId == categoryGroupBuilder.Id).ToArray();
-                categoryGroupBuilder.WithBudgetCategories(categoriesPerGroup);
+                categoryGroupBuilder.WithCategories(categoriesPerGroup);
             }
         }
     }

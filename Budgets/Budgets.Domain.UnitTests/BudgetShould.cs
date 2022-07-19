@@ -85,7 +85,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void GroupCategoryAssignedMoneyShouldReturnTheAssignedMoneyOfTheirBudgetCategories()
+        public void GroupCategoryAssignedMoneyShouldReturnTheAssignedMoneyOfTheirCategories()
         {
             var money1 = Money.Euro(10);
             var money2 = Money.Euro(20);
@@ -107,11 +107,11 @@ namespace Budgets.Domain.UnitTests
                 .Build();
 
             var GroupCategory1 = new GroupCategoryBuilder()
-                .WithBudgetCategories(categoryAssigned1, categoryAssigned2)
+                .WithCategories(categoryAssigned1, categoryAssigned2)
                 .Build();
 
             var GroupCategory2 = new GroupCategoryBuilder()
-                .WithBudgetCategories(categoryAssigned3)
+                .WithCategories(categoryAssigned3)
                 .Build();
 
             var budget = new BudgetBuilder()

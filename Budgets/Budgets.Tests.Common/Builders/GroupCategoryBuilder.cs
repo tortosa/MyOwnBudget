@@ -38,13 +38,13 @@ namespace Budgets.Tests.Common.Builders
             return this;
         }
 
-        public GroupCategoryBuilder WithBudgetCategories(params Category[] budgetCategories)
+        public GroupCategoryBuilder WithCategories(params Category[] categories)
         {
-            this.Categories.AddRange(budgetCategories);
+            this.Categories.AddRange(categories);
             return this;
         }
 
-        public GroupCategoryBuilder WithBudgetCategories(params CategoryBuilder[] categoryBuilders)
+        public GroupCategoryBuilder WithCategories(params CategoryBuilder[] categoryBuilders)
         {
             this.CategoryBuilders.AddRange(categoryBuilders);
             return this;
@@ -57,7 +57,7 @@ namespace Budgets.Tests.Common.Builders
             var categoryBuilders = CategoryBuilders.Select(builder => builder.Build());
             var categories = Categories.Concat(categoryBuilders);
 
-            category.AddBudgetCategories(categories.ToArray());
+            category.AddCategories(categories.ToArray());
 
             return category;
         }
