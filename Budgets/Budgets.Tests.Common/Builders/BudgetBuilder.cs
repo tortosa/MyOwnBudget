@@ -10,16 +10,16 @@ namespace Budgets.Tests.Common.Builders
         public string Label { get; private set; }
         public string CurrencyCode { get; private set; }
         public string DateFormat { get; private set; }
-        public List<BudgetCategoryGroup> BudgetCategoryGroups { get; private set; }
-        public List<BudgetCategoryGroupBuilder> BudgetCategoryGroupBuilders { get; private set; }
+        public List<GroupCategory> GroupCategories { get; private set; }
+        public List<GroupCategoryBuilder> GroupCategoryBuilders { get; private set; }
 
         public BudgetBuilder()
         {
             Id = 0;
             Label = "defaultLabel";
             CurrencyCode = "EUR";
-            BudgetCategoryGroups = new List<BudgetCategoryGroup>();
-            BudgetCategoryGroupBuilders = new List<BudgetCategoryGroupBuilder>();
+            GroupCategories = new List<GroupCategory>();
+            GroupCategoryBuilders = new List<GroupCategoryBuilder>();
         }
 
         public BudgetBuilder WithId(int id)
@@ -46,25 +46,25 @@ namespace Budgets.Tests.Common.Builders
             return this;
         }
 
-        public BudgetBuilder WithBudgetCategoryGroups(params BudgetCategoryGroup[] budgetCategoryGroups)
+        public BudgetBuilder WithGroupCategories(params GroupCategory[] GroupCategories)
         {
-            this.BudgetCategoryGroups.AddRange(budgetCategoryGroups);
+            this.GroupCategories.AddRange(GroupCategories);
             return this;
         }
 
-        public BudgetBuilder WithBudgetCategoryGroups(params BudgetCategoryGroupBuilder[] budgetCategoryGroupBuilders)
+        public BudgetBuilder WithGroupCategories(params GroupCategoryBuilder[] GroupCategoryBuilders)
         {
-            this.BudgetCategoryGroupBuilders.AddRange(budgetCategoryGroupBuilders);
+            this.GroupCategoryBuilders.AddRange(GroupCategoryBuilders);
             return this;
         }
 
         public Budget Build()
         {
             var budget = new Budget(Id, Label, CurrencyCode, DateFormat);
-            var categoryGroupBuilders = BudgetCategoryGroupBuilders.Select(builder => builder.Build());
-            var categoryGroups = BudgetCategoryGroups.Concat(categoryGroupBuilders);
+            var categoryGroupBuilders = GroupCategoryBuilders.Select(builder => builder.Build());
+            var categoryGroups = GroupCategories.Concat(categoryGroupBuilders);
 
-            budget.AddBudgetCategoryGroups(categoryGroups.ToArray());
+            budget.AddGroupCategories(categoryGroups.ToArray());
             return budget;
         }
     }

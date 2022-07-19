@@ -11,16 +11,16 @@ namespace Budgets.Domain.Specifications.Steps
     [Binding]
     public class CategoryStep
     {
-        private readonly BudgetCategoryGroupContext categoryGroupContext;
+        private readonly GroupCategoryContext categoryGroupContext;
         private readonly BudgetCategoryContext categoryContext;
 
-        public CategoryStep(BudgetCategoryContext categoryContext, BudgetCategoryGroupContext categoryGroupContext)
+        public CategoryStep(BudgetCategoryContext categoryContext, GroupCategoryContext categoryGroupContext)
         {
             this.categoryContext = categoryContext;
             this.categoryGroupContext = categoryGroupContext;
         }
 
-        [Given(@"Category associated to CategoryGroup")]
+        [Given(@"Category associated to GroupCategory")]
         public void GivenCategory(Table table)
         {
             var modelList = table.CreateSet<BudgetCategoryModel>().ToList();
@@ -29,9 +29,9 @@ namespace Budgets.Domain.Specifications.Steps
 
             categoryContext.BudgetCategories = GivenBuilderFactory.GivenCategory(modelList);
 
-            foreach (var categoryGroupBuilder in categoryGroupContext.BudgetCategoryGroups)
+            foreach (var categoryGroupBuilder in categoryGroupContext.GroupCategories)
             {
-                var categoriesPerGroup = categoryContext.BudgetCategories.Where(x =>x.CategoryGroupId == categoryGroupBuilder.Id).ToArray();
+                var categoriesPerGroup = categoryContext.BudgetCategories.Where(x =>x.GroupCategoryId == categoryGroupBuilder.Id).ToArray();
                 categoryGroupBuilder.WithBudgetCategories(categoriesPerGroup);
             }
         }

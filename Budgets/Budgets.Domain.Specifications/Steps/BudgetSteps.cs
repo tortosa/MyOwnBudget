@@ -27,5 +27,13 @@ namespace Budgets.Domain.Specifications.Steps
 
             budgetContext.Budgets = GivenBuilderFactory.GivenBudgets(modelList);
         }
+
+        [When(@"(.*) is actioned")]
+        public void WhenBudgetIsActioned(string budgetLabel)
+        {
+            var test = budgetContext.Budgets.Where(x => x.Label.Equals(budgetLabel, System.StringComparison.InvariantCultureIgnoreCase)).SingleOrDefault();
+            var budget = test.Build();
+        }
+
     }
 }

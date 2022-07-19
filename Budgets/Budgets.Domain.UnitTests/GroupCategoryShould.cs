@@ -6,44 +6,44 @@ using Xunit;
 
 namespace Budgets.Domain.UnitTests
 {
-    public class BudgetCategoryGroupShould
+    public class GroupCategoryShould
     {
 
         [Fact]
-        public void BudgetCategoryGroupShouldHaveId()
+        public void GroupCategoryShouldHaveId()
         {
             var expectedId = 1;
-            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
+            var GroupCategory = new GroupCategoryBuilder()
                 .WithId(expectedId)
                 .Build();
 
-            Assert.Equal(expectedId, budgetCategoryGroup.Id);
+            Assert.Equal(expectedId, GroupCategory.Id);
         }
 
         [Fact]
-        public void BudgetCategoryGroupShouldHaveLabel()
+        public void GroupCategoryShouldHaveLabel()
         {
-            var expectedLabel = "budgetCategoryGroup name";
-            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
+            var expectedLabel = "GroupCategory name";
+            var groupCategory = new GroupCategoryBuilder()
                 .WithLabel(expectedLabel)
                 .Build();
 
-            Assert.Equal(expectedLabel, budgetCategoryGroup.Label);
+            Assert.Equal(expectedLabel, groupCategory.Label);
         }
 
         [Fact]
-        public void BudgetCategoryGroupShouldNotAllowEmptyLabel()
+        public void GroupCategoryShouldNotAllowEmptyLabel()
         {
             var expectedLabel = string.Empty;
-            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
+            var groupCategory = new GroupCategoryBuilder()
                 .WithLabel(expectedLabel)
                 .Build();
 
-            Assert.NotEmpty(budgetCategoryGroup.Label);
+            Assert.NotEmpty(groupCategory.Label);
         }
 
         [Fact]
-        public void BudgetCategoryGroupAssignedMoneyShouldReturnTheBalanceOfTheirBudgetCategories()
+        public void GroupCategoryAssignedMoneyShouldReturnTheBalanceOfTheirBudgetCategories()
         {
             var money1 = Money.Euro(10);
             var money2 = Money.Euro(20);
@@ -64,15 +64,15 @@ namespace Budgets.Domain.UnitTests
                 .WithMoneyAssigned(anotherMonthYear, money3)
                 .Build();
 
-            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
+            var groupCategory = new GroupCategoryBuilder()
                 .WithBudgetCategories(budgetCategoryAssigned1, budgetCategoryAssigned2, budgetCategoryAssigned3)
                 .Build();
 
-            Assert.Equal(expectedAssigned, budgetCategoryGroup.GetAssignedMoney(monthYear));
+            Assert.Equal(expectedAssigned, groupCategory.GetAssignedMoney(monthYear));
         }
 
         [Fact]
-        public void BudgetCategoryGroupAvaiableMoneyShouldReturnTheBalanceOfTheirBudgetCategories()
+        public void GroupCategoryAvailableMoneyShouldReturnTheBalanceOfTheirBudgetCategories()
         {
             var monthYearMay = new MonthYear(Month.May, 2022);
             var monthYearJune = new MonthYear(Month.June, 2022);
@@ -115,12 +115,12 @@ namespace Budgets.Domain.UnitTests
                 .WithTransactions(transactionMay1, transactionMay2, transactionJune)
                 .Build();
 
-            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
+            var GroupCategory = new GroupCategoryBuilder()
                 .WithBudgetCategories(budgetCategoryMay, budgetCategoryJune)
                 .Build();
 
             var expectedMoneyAvailableInJune = moneyAssignedInJune + moneyAssignedInMay + moneyTransactionInMay1 + moneyTransactionInMay2 + moneyTransactionInJune;
-            Assert.Equal(expectedMoneyAvailableInJune, budgetCategoryGroup.GetAvailableMoneyAt(monthYearJune));
+            Assert.Equal(expectedMoneyAvailableInJune, GroupCategory.GetAvailableMoneyAt(monthYearJune));
         }
     }
 }

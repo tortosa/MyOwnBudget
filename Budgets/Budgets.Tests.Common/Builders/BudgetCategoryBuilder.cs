@@ -8,7 +8,7 @@ namespace Budgets.Tests.Common.Builders
     public class BudgetCategoryBuilder
     {
         public int Id { get; private set; }
-        public int CategoryGroupId { get; private set; }
+        public int GroupCategoryId { get; private set; }
         public string Label  { get; private set; }
         public Dictionary<MonthYear, Money> MoneyAssigned  { get; private set; }
         public List<Transaction> TransactionsAssociated  { get; private set; }
@@ -16,7 +16,7 @@ namespace Budgets.Tests.Common.Builders
         public BudgetCategoryBuilder()
         {
             Id = 0;
-            CategoryGroupId = 0;
+            GroupCategoryId = 0;
             MoneyAssigned = new Dictionary<MonthYear, Money>();
             TransactionsAssociated = new List<Transaction>();
             Label = "defaultLabel";
@@ -28,9 +28,9 @@ namespace Budgets.Tests.Common.Builders
             return this;
         }
 
-        public BudgetCategoryBuilder WithCategoryGroupId(int categoryGroupId)
+        public BudgetCategoryBuilder WithGroupCategoryId(int groupCategoryId)
         {
-            this.CategoryGroupId = categoryGroupId;
+            this.GroupCategoryId = groupCategoryId;
             return this;
         }
 

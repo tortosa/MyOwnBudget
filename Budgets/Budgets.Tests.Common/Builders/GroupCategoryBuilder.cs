@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Budgets.Tests.Common.Builders
 {
-    public class BudgetCategoryGroupBuilder
+    public class GroupCategoryBuilder
     {
         public int Id { get; private set; }
         public int BudgetId { get; private set; }
@@ -12,7 +12,7 @@ namespace Budgets.Tests.Common.Builders
         public List<BudgetCategory> budgetCategories { get; private set; }
         public List<BudgetCategoryBuilder> budgetCategoryBuilders { get; private set; }
 
-        public BudgetCategoryGroupBuilder()
+        public GroupCategoryBuilder()
         {
             Id = 0;
             label = "defaultLabel";
@@ -20,39 +20,39 @@ namespace Budgets.Tests.Common.Builders
             budgetCategoryBuilders = new List<BudgetCategoryBuilder>();
         }
 
-        public BudgetCategoryGroupBuilder WithId(int id)
+        public GroupCategoryBuilder WithId(int id)
         {
             this.Id = id;
             return this;
         }
 
-        public BudgetCategoryGroupBuilder WithBudgetId(int budgetId)
+        public GroupCategoryBuilder WithBudgetId(int budgetId)
         {
             this.BudgetId = budgetId;
             return this;
         }
 
-        public BudgetCategoryGroupBuilder WithLabel(string label)
+        public GroupCategoryBuilder WithLabel(string label)
         {
             this.label = label;
             return this;
         }
 
-        public BudgetCategoryGroupBuilder WithBudgetCategories(params BudgetCategory[] budgetCategories)
+        public GroupCategoryBuilder WithBudgetCategories(params BudgetCategory[] budgetCategories)
         {
             this.budgetCategories.AddRange(budgetCategories);
             return this;
         }
 
-        public BudgetCategoryGroupBuilder WithBudgetCategories(params BudgetCategoryBuilder[] budgetCategoryBuilders)
+        public GroupCategoryBuilder WithBudgetCategories(params BudgetCategoryBuilder[] budgetCategoryBuilders)
         {
             this.budgetCategoryBuilders.AddRange(budgetCategoryBuilders);
             return this;
         }
 
-        public BudgetCategoryGroup Build()
+        public GroupCategory Build()
         {
-            var budgetCategory = new BudgetCategoryGroup(Id, label);
+            var budgetCategory = new GroupCategory(Id, label);
 
             var categoryBuilders = budgetCategoryBuilders.Select(builder => builder.Build());
             var categories = budgetCategories.Concat(categoryBuilders);

@@ -9,30 +9,30 @@ using Xunit;
 namespace Budgets.Domain.Specifications.Steps
 {
     [Binding]
-    public class CategoryGroupStep
+    public class GroupCategoryStep
     {
         private readonly BudgetContext budgetContext;
-        private readonly BudgetCategoryGroupContext categoryGroupContext;
+        private readonly GroupCategoryContext categoryGroupContext;
 
-        public CategoryGroupStep(BudgetContext budgetContext, BudgetCategoryGroupContext categoryGroupContext)
+        public GroupCategoryStep(BudgetContext budgetContext, GroupCategoryContext categoryGroupContext)
         {
             this.budgetContext = budgetContext;
             this.categoryGroupContext = categoryGroupContext;
         }
 
-        [Given(@"CategoryGroup associated to budgets")]
-        public void GivenCategoryGroup(Table table)
+        [Given(@"GroupCategory associated to budgets")]
+        public void GivenGroupCategory(Table table)
         {
-            var modelList = table.CreateSet<BudgetCategoryGroupModel>().ToList();
+            var modelList = table.CreateSet<GroupCategoryModel>().ToList();
             if (modelList.Select(model => model.Id).Count() != modelList.Count)
                 Assert.True(false, "Check your category group ids, they may be duplicated");
 
-            categoryGroupContext.BudgetCategoryGroups = GivenBuilderFactory.GivenCategoryGroup(modelList);
+            categoryGroupContext.GroupCategories = GivenBuilderFactory.GivenGroupCategory(modelList);
 
             foreach (var budgetBuilder in budgetContext.Budgets)
             {
-                var groupsPerBudget = categoryGroupContext.BudgetCategoryGroups.Where(x =>x.BudgetId == budgetBuilder.Id).ToArray();
-                budgetBuilder.WithBudgetCategoryGroups(groupsPerBudget);
+                var groupsPerBudget = categoryGroupContext.GroupCategories.Where(x =>x.BudgetId == budgetBuilder.Id).ToArray();
+                budgetBuilder.WithGroupCategories(groupsPerBudget);
             }
         }
     }

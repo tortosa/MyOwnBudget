@@ -11,12 +11,12 @@ namespace Budgets.Domain
         public string Label { get; }
         public string DateFormat { get; }
         public Currency Currency { get; }
-        public List<BudgetCategoryGroup> BudgetCategoryGroups { get; }
+        public List<GroupCategory> GroupCategories { get; }
         public Money AssignedMoney => GetAssignedMoney();
 
         public Budget(int id, string label, string currencyCode, string dateFormat)
         {
-            BudgetCategoryGroups = new List<BudgetCategoryGroup>();
+            GroupCategories = new List<GroupCategory>();
 
             if (string.IsNullOrEmpty(label))
                 label = "Default account label";
@@ -26,14 +26,14 @@ namespace Budgets.Domain
             DateFormat = dateFormat;
         }
 
-        public void AddBudgetCategoryGroups(params BudgetCategoryGroup[] budgetCategoryGroups)
+        public void AddGroupCategories(params GroupCategory[] GroupCategories)
         {
-            BudgetCategoryGroups.AddRange(budgetCategoryGroups);
+            this.GroupCategories.AddRange(GroupCategories);
         }
 
         private Money GetAssignedMoney()
         {
-            return BudgetCategoryGroups.Sum(transaction => transaction.AssignedMoney.Amount);
+            return GroupCategories.Sum(transaction => transaction.AssignedMoney.Amount);
         }
     }
 }

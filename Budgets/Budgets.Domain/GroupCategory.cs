@@ -5,21 +5,21 @@ using System.Linq;
 
 namespace Budgets.Domain
 {
-    public class BudgetCategoryGroup
+    public class GroupCategory
     {
-        protected BudgetCategoryGroup() { }
+        protected GroupCategory() { }
 
         public int Id { get; }
         public string Label { get; }
         public List<BudgetCategory> BudgetCategories { get; }
         public Money AssignedMoney => GetAssignedMoney();
 
-        public BudgetCategoryGroup(int id, string label)
+        public GroupCategory(int id, string label)
         {
             BudgetCategories = new List<BudgetCategory>();
 
             if (string.IsNullOrEmpty(label))
-                label = "Default BudgetCategoryGroup label";
+                label = "Default GroupCategory label";
             Label = label;
             Id = id;
         }

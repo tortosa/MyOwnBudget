@@ -24,20 +24,20 @@ namespace Budgets.Domain.Specifications.Steps.Given
             return domainBudgets;
         }
 
-        public static IEnumerable<BudgetCategoryGroupBuilder> GivenCategoryGroup(IEnumerable<BudgetCategoryGroupModel> categoryGroupModels)
+        public static IEnumerable<GroupCategoryBuilder> GivenGroupCategory(IEnumerable<GroupCategoryModel> groupCategoryModels)
         {
-            var domainCategoryGroup = new List<BudgetCategoryGroupBuilder>();
+            var domainGroupCategory = new List<GroupCategoryBuilder>();
 
-            foreach (var categoryGroupModel in categoryGroupModels)
+            foreach (var categoryGroupModel in groupCategoryModels)
             {
-                domainCategoryGroup.Add(
-                    new BudgetCategoryGroupBuilder()
+                domainGroupCategory.Add(
+                    new GroupCategoryBuilder()
                     .WithId(categoryGroupModel.Id)
                     .WithBudgetId(categoryGroupModel.BudgetId)
                     .WithLabel(categoryGroupModel.Label)
                     );
             }
-            return domainCategoryGroup;
+            return domainGroupCategory;
         }
 
         public static IEnumerable<BudgetCategoryBuilder> GivenCategory(IEnumerable<BudgetCategoryModel> categoryModels)
@@ -49,7 +49,7 @@ namespace Budgets.Domain.Specifications.Steps.Given
                 domainCategory.Add(
                     new BudgetCategoryBuilder()
                     .WithId(categoryModel.Id)
-                    .WithCategoryGroupId(categoryModel.CategoryGroupId)
+                    .WithGroupCategoryId(categoryModel.GroupCategoryId)
                     .WithLabel(categoryModel.Label)
                     );
             }

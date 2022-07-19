@@ -43,18 +43,18 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void BudgetCategoryShouldHaveABudgetCategoryGroup()
+        public void BudgetCategoryShouldHaveAGroupCategory()
         {
-            var expectedLabel = "BudgetCategoryGroup";
+            var expectedLabel = "GroupCategory";
             var budgetCategory = new BudgetCategoryBuilder()
                .WithLabel(expectedLabel)
                .Build();
 
-            var budgetCategoryGroup = new BudgetCategoryGroupBuilder()
+            var groupCategory = new GroupCategoryBuilder()
                 .WithBudgetCategories(budgetCategory)
                 .Build();
 
-            Assert.Equal(expectedLabel, budgetCategoryGroup.BudgetCategories[0].Label);
+            Assert.Equal(expectedLabel, groupCategory.BudgetCategories[0].Label);
         }
 
         [Fact]

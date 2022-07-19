@@ -63,29 +63,29 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void BudgetShouldHaveBudgetCategoryGroups()
+        public void BudgetShouldHaveGroupCategories()
         {
-            var budgetCategoryGroupLabel1 = "Group1";
-            var budgetCategoryGroupLabel2 = "Group2";
+            var GroupCategoryLabel1 = "Group1";
+            var GroupCategoryLabel2 = "Group2";
 
-            var expectedBudgetCategoryGroup1 = new BudgetCategoryGroupBuilder()
-                .WithLabel(budgetCategoryGroupLabel1)
+            var expectedGroupCategory1 = new GroupCategoryBuilder()
+                .WithLabel(GroupCategoryLabel1)
                 .Build();
 
-            var expectedBudgetCategoryGroup2 = new BudgetCategoryGroupBuilder()
-               .WithLabel(budgetCategoryGroupLabel2)
+            var expectedGroupCategory2 = new GroupCategoryBuilder()
+               .WithLabel(GroupCategoryLabel2)
                .Build();
 
             var budget = new BudgetBuilder()
-               .WithBudgetCategoryGroups(expectedBudgetCategoryGroup1, expectedBudgetCategoryGroup2)
+               .WithGroupCategories(expectedGroupCategory1, expectedGroupCategory2)
                .Build();
 
-            Assert.Contains(expectedBudgetCategoryGroup1, budget.BudgetCategoryGroups);
-            Assert.Contains(expectedBudgetCategoryGroup2, budget.BudgetCategoryGroups);
+            Assert.Contains(expectedGroupCategory1, budget.GroupCategories);
+            Assert.Contains(expectedGroupCategory2, budget.GroupCategories);
         }
 
         [Fact]
-        public void BudgetCategoryGroupAssignedMoneyShouldReturnTheAssignedMoneyOfTheirBudgetCategories()
+        public void GroupCategoryAssignedMoneyShouldReturnTheAssignedMoneyOfTheirBudgetCategories()
         {
             var money1 = Money.Euro(10);
             var money2 = Money.Euro(20);
@@ -106,16 +106,16 @@ namespace Budgets.Domain.UnitTests
                 .WithMoneyAssigned(anotherMonthYear, money3)
                 .Build();
 
-            var budgetCategoryGroup1 = new BudgetCategoryGroupBuilder()
+            var GroupCategory1 = new GroupCategoryBuilder()
                 .WithBudgetCategories(budgetCategoryAssigned1, budgetCategoryAssigned2)
                 .Build();
 
-            var budgetCategoryGroup2 = new BudgetCategoryGroupBuilder()
+            var GroupCategory2 = new GroupCategoryBuilder()
                 .WithBudgetCategories(budgetCategoryAssigned3)
                 .Build();
 
             var budget = new BudgetBuilder()
-               .WithBudgetCategoryGroups(budgetCategoryGroup1, budgetCategoryGroup2)
+               .WithGroupCategories(GroupCategory1, GroupCategory2)
                .Build();
 
             Assert.Equal(expectedAssigned, budget.AssignedMoney);

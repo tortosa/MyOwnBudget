@@ -19,7 +19,7 @@ namespace Budgets.Domain.UnitTests
         [Fact]
         public void PayeeShouldHaveLabel()
         {
-            var expectedLabel = "budgetCategoryGroup name";
+            var expectedLabel = "GroupCategory name";
             var payee = new PayeeBuilder()
                 .WithLabel(expectedLabel)
                 .Build();
