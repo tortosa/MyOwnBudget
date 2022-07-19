@@ -4,22 +4,29 @@ namespace Budgets.Tests.Common.Builders
 {
     public class PayeeBuilder
     {
-        private string label;
+        public int Id { get; private set; }
+        public string Label { get; private set; }
 
         public PayeeBuilder()
         {
-            label = "defaultLabel";
+            Label = "defaultLabel";
+        }
+
+        public PayeeBuilder WithId(int id)
+        {
+            this.Id = id;
+            return this;
         }
 
         public PayeeBuilder WithLabel(string label)
         {
-            this.label = label;
+            this.Label = label;
             return this;
         }
 
         public Payee Build()
         {
-            var payee = new Payee(label);
+            var payee = new Payee(Id, Label);
             return payee;
         }
     }
