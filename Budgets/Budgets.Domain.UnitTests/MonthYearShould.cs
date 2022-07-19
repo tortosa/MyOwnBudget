@@ -1,4 +1,5 @@
 using Budgets.Domain.ValueObjects;
+using FluentAssertions;
 using Xunit;
 
 namespace Budgets.Domain.UnitTests
@@ -10,12 +11,12 @@ namespace Budgets.Domain.UnitTests
         {
             MonthYear monthYearNull = null;
             var monthYear = new MonthYear(Month.January, 2022);
-            Assert.False(monthYearNull == monthYear);
-            Assert.False(monthYear.Equals(monthYearNull));
-            Assert.True(monthYear.Equals(monthYear));
-            Assert.True(monthYearNull == monthYearNull);
-            Assert.False(monthYear.Equals(new string("test")));
-            Assert.False(monthYear != new MonthYear(Month.January, 2022));
+            (monthYearNull == monthYear).Should().BeFalse();
+            (monthYear.Equals(monthYearNull)).Should().BeFalse();
+            monthYear.Equals(monthYear).Should().BeTrue();
+            (monthYearNull == monthYearNull).Should().BeTrue();
+            monthYear.Equals(new string("test")).Should().BeFalse();
+            (monthYear != new MonthYear(Month.January, 2022)).Should().BeFalse();
         }
 
         [Fact]
@@ -27,7 +28,7 @@ namespace Budgets.Domain.UnitTests
             var monthYear = new MonthYear(month, year);
             var anotherMonthYear = new MonthYear(month, year);
 
-            Assert.Equal(monthYear, anotherMonthYear);             
+            monthYear.Should().Be(anotherMonthYear);       
         }
 
         [Fact]
@@ -40,7 +41,7 @@ namespace Budgets.Domain.UnitTests
             var anotherMonthYear = new MonthYear(month, year);
 
             var equalComparator = monthYear == anotherMonthYear;
-            Assert.True(equalComparator);
+            equalComparator.Should().BeTrue();
         }
 
         [Fact]
@@ -52,8 +53,8 @@ namespace Budgets.Domain.UnitTests
             var monthYear = new MonthYear(month, year);
             var previousMonthYear = monthYear.GetPreviousMonth();
 
-            Assert.Equal(expectedMonth, previousMonthYear.Month);
-            Assert.Equal(year, previousMonthYear.Year);
+            previousMonthYear.Month.Should().Be(expectedMonth);
+            previousMonthYear.Year.Should().Be(year);
         }
 
         [Fact]
@@ -64,9 +65,9 @@ namespace Budgets.Domain.UnitTests
             var year = 2022;
             var monthYear = new MonthYear(month, year);
             var previousMonthYear = monthYear.GetPreviousMonth();
-
-            Assert.Equal(expectedMonth, previousMonthYear.Month);
-            Assert.Equal(year - 1, previousMonthYear.Year);
+            
+            previousMonthYear.Month.Should().Be(expectedMonth);
+            previousMonthYear.Year.Should().Be(year - 1);
         }
     }
 }

@@ -2,6 +2,7 @@ using Budgets.Domain.ValueObjects;
 using Budgets.Tests.Common.Builders;
 using NodaMoney;
 using System;
+using FluentAssertions;
 using Xunit;
 
 namespace Budgets.Domain.UnitTests
@@ -28,7 +29,7 @@ namespace Budgets.Domain.UnitTests
                 .WithLabel(expectedLabel)
                 .Build();
 
-            Assert.Equal(expectedLabel, groupCategory.Label);
+            groupCategory.Label.Should().Be(expectedLabel);
         }
 
         [Fact]
@@ -39,7 +40,7 @@ namespace Budgets.Domain.UnitTests
                 .WithLabel(expectedLabel)
                 .Build();
 
-            Assert.NotEmpty(groupCategory.Label);
+            groupCategory.Label.Should().NotBeEmpty();
         }
 
         [Fact]
@@ -68,7 +69,7 @@ namespace Budgets.Domain.UnitTests
                 .WithCategories(categoryAssigned1, categoryAssigned2, categoryAssigned3)
                 .Build();
 
-            Assert.Equal(expectedAssigned, groupCategory.GetAssignedMoney(monthYear));
+             groupCategory.GetAssignedMoney(monthYear).Should().Be(expectedAssigned);
         }
 
         [Fact]
@@ -119,7 +120,7 @@ namespace Budgets.Domain.UnitTests
             budget.AddTransaction(transactionMay1, transactionMay2, transactionJune);
 
             var expectedMoneyAvailableInJune = moneyAssignedInJune + moneyAssignedInMay + moneyTransactionInMay1 + moneyTransactionInMay2 + moneyTransactionInJune;
-            Assert.Equal(expectedMoneyAvailableInJune, GroupCategory.GetAvailableMoneyAt(monthYearJune));
+            GroupCategory.GetAvailableMoneyAt(monthYearJune).Should().Be(expectedMoneyAvailableInJune);
         }
     }
 }

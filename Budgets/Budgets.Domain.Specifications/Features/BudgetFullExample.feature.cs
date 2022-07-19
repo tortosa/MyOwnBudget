@@ -99,12 +99,12 @@ namespace Budgets.Domain.Specifications.Features
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("MayJunExample", SourceLine=13)]
-        public virtual void MayJunExample()
+        [TechTalk.SpecRun.ScenarioAttribute("ComplexCase", SourceLine=13)]
+        public virtual void ComplexCase()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("MayJunExample", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ComplexCase", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

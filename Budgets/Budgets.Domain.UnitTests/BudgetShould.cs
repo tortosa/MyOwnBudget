@@ -1,5 +1,6 @@
 using Budgets.Tests.Common.Builders;
 using Budgets.Domain.ValueObjects;
+using FluentAssertions;
 using NodaMoney;
 using Xunit;
 
@@ -26,7 +27,7 @@ namespace Budgets.Domain.UnitTests
                 .WithLabel(expectedLabel)
                 .Build();
 
-            Assert.Equal(expectedLabel, budget.Label);
+            budget.Label.Should().Be(expectedLabel);
         }
 
         [Fact]
@@ -37,7 +38,7 @@ namespace Budgets.Domain.UnitTests
                .WithLabel(expectedLabel)
                .Build();
 
-            Assert.NotEmpty(budget.Label);
+            budget.Label.Should().NotBeEmpty();
         }
 
         [Fact]
@@ -48,7 +49,7 @@ namespace Budgets.Domain.UnitTests
                .WithCurrencyCode(expectedCurrencyCode)
                .Build();
 
-            Assert.Equal(expectedCurrencyCode, budget.Currency.Code);
+            budget.Currency.Code.Should().Be(expectedCurrencyCode);
         }
 
         [Fact]
@@ -59,7 +60,7 @@ namespace Budgets.Domain.UnitTests
                .WithDateFormat(expectedDateFormat)
                .Build();
 
-            Assert.Equal(expectedDateFormat, budget.DateFormat);
+            budget.DateFormat.Should().Be(expectedDateFormat);
         }
 
         [Fact]
@@ -80,8 +81,8 @@ namespace Budgets.Domain.UnitTests
                .WithGroupCategories(expectedGroupCategory1, expectedGroupCategory2)
                .Build();
 
-            Assert.Contains(expectedGroupCategory1, budget.GroupCategories);
-            Assert.Contains(expectedGroupCategory2, budget.GroupCategories);
+            budget.GroupCategories.Should().Contain(expectedGroupCategory1);
+            budget.GroupCategories.Should().Contain(expectedGroupCategory2);
         }
 
         [Fact]
@@ -118,7 +119,7 @@ namespace Budgets.Domain.UnitTests
                .WithGroupCategories(GroupCategory1, GroupCategory2)
                .Build();
 
-            Assert.Equal(expectedAssigned, budget.AssignedMoney);
+            budget.AssignedMoney.Should().Be(expectedAssigned);
         }
     }
 }

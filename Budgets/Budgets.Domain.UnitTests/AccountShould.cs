@@ -1,6 +1,7 @@
 using NodaMoney;
 using Xunit;
 using Budgets.Tests.Common.Builders;
+using FluentAssertions;
 
 namespace Budgets.Domain.UnitTests
 {
@@ -25,7 +26,7 @@ namespace Budgets.Domain.UnitTests
                 .WithLabel(expectedLabel)
                 .Build();
 
-            Assert.Equal(expectedLabel, account.Label);             
+            account.Label.Should().Be(expectedLabel);
         }
 
         [Fact]
@@ -36,7 +37,7 @@ namespace Budgets.Domain.UnitTests
                .WithLabel(expectedLabel)
                .Build();
 
-            Assert.NotEmpty(account.Label);
+            account.Label.Should().NotBeEmpty();
         }
 
         [Fact]
@@ -57,7 +58,7 @@ namespace Budgets.Domain.UnitTests
                .WithTransactions(transaction1, transaction2)
                .Build();
 
-            Assert.Equal(expectedBalance, account.Balance);
+            account.Balance.Should().Be(expectedBalance);
         }
 
         [Fact]
@@ -72,8 +73,7 @@ namespace Budgets.Domain.UnitTests
 
             var budget = new BudgetBuilder().Build();
             budget.AddTransaction(transaction1);
-
-            Assert.Equal(moneyAdded, transaction1.Account.Balance);
+            transaction1.Account.Balance.Should().Be(moneyAdded);
         }
     }
 }

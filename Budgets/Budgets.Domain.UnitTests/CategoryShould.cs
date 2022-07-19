@@ -3,6 +3,7 @@ using Budgets.Domain.ValueObjects;
 using NodaMoney;
 using System;
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 namespace Budgets.Domain.UnitTests
@@ -28,7 +29,7 @@ namespace Budgets.Domain.UnitTests
                 .WithLabel(expectedLabel)
                 .Build();
 
-            Assert.Equal(expectedLabel, category.Label);             
+             category.Label.Should().Be(expectedLabel);           
         }
 
         [Fact]
@@ -39,7 +40,7 @@ namespace Budgets.Domain.UnitTests
                .WithLabel(expectedLabel)
                .Build();
 
-            Assert.NotEmpty(category.Label);
+            category.Label.Should().NotBeEmpty();
         }
 
         [Fact]
@@ -54,7 +55,7 @@ namespace Budgets.Domain.UnitTests
                 .WithCategories(category)
                 .Build();
 
-            Assert.Equal(expectedLabel, groupCategory.Categories[0].Label);
+            groupCategory.Categories[0].Label.Should().Be(expectedLabel);
         }
 
         [Fact]
@@ -67,7 +68,7 @@ namespace Budgets.Domain.UnitTests
                 .WithMoneyAssigned(monthYear, expectedMoneyAssigned)
                 .Build();
 
-            Assert.Equal(expectedMoneyAssigned, category.MoneyAssigned.Sum(moneyAssigned => moneyAssigned.Value.Amount));
+            category.MoneyAssigned.Sum(moneyAssigned => moneyAssigned.Value.Amount).Should().Be(expectedMoneyAssigned.Amount);
         }
 
         [Fact]
@@ -81,7 +82,7 @@ namespace Budgets.Domain.UnitTests
                 .WithMoneyAssigned(new MonthYear(Month.April, 2022), expectedMoney)
                 .Build();
 
-            Assert.Equal(expectedMoney, category.GetAssignedMoneyAt(monthYear));
+            category.GetAssignedMoneyAt(monthYear).Should().Be(expectedMoney);
         }
 
         [Fact]
@@ -125,7 +126,7 @@ namespace Budgets.Domain.UnitTests
             budget.AddTransaction(transactionMay1, transactionMay2, transactionJune);
 
             var expectedMoneyAvailableInJune = moneyAssignedInJune + moneyAssignedInMay + moneyTransactionInMay1 + moneyTransactionInMay2 + moneyTransactionInJune;
-            Assert.Equal(expectedMoneyAvailableInJune, category.GetAvailableMoneyAt(monthYearJune));
+            category.GetAvailableMoneyAt(monthYearJune).Should().Be(expectedMoneyAvailableInJune);
         }
 
          [Fact]
@@ -136,7 +137,7 @@ namespace Budgets.Domain.UnitTests
             var category = new CategoryBuilder()
                 .Build();
 
-            Assert.Equal(expectedMoney, category.GetAssignedMoneyAt(monthYear));
+            category.GetAssignedMoneyAt(monthYear).Should().Be(expectedMoney);
         }
     }
 }
