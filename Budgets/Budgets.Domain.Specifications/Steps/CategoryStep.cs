@@ -12,9 +12,9 @@ namespace Budgets.Domain.Specifications.Steps
     public class CategoryStep
     {
         private readonly GroupCategoryContext categoryGroupContext;
-        private readonly BudgetCategoryContext categoryContext;
+        private readonly CategoryContext categoryContext;
 
-        public CategoryStep(BudgetCategoryContext categoryContext, GroupCategoryContext categoryGroupContext)
+        public CategoryStep(CategoryContext categoryContext, GroupCategoryContext categoryGroupContext)
         {
             this.categoryContext = categoryContext;
             this.categoryGroupContext = categoryGroupContext;
@@ -23,15 +23,15 @@ namespace Budgets.Domain.Specifications.Steps
         [Given(@"Category associated to GroupCategory")]
         public void GivenCategory(Table table)
         {
-            var modelList = table.CreateSet<BudgetCategoryModel>().ToList();
+            var modelList = table.CreateSet<CategoryModel>().ToList();
             if (modelList.Select(model => model.Id).Count() != modelList.Count)
                 Assert.True(false, "Check your category ids, they may be duplicated");
 
-            categoryContext.BudgetCategories = GivenBuilderFactory.GivenCategory(modelList);
+            categoryContext.Categories = GivenBuilderFactory.GivenCategory(modelList);
 
             foreach (var categoryGroupBuilder in categoryGroupContext.GroupCategories)
             {
-                var categoriesPerGroup = categoryContext.BudgetCategories.Where(x =>x.GroupCategoryId == categoryGroupBuilder.Id).ToArray();
+                var categoriesPerGroup = categoryContext.Categories.Where(x =>x.GroupCategoryId == categoryGroupBuilder.Id).ToArray();
                 categoryGroupBuilder.WithBudgetCategories(categoriesPerGroup);
             }
         }

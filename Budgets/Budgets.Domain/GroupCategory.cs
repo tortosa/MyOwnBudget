@@ -11,12 +11,12 @@ namespace Budgets.Domain
 
         public int Id { get; }
         public string Label { get; }
-        public List<BudgetCategory> BudgetCategories { get; }
+        public List<Category> BudgetCategories { get; }
         public Money AssignedMoney => GetAssignedMoney();
 
         public GroupCategory(int id, string label)
         {
-            BudgetCategories = new List<BudgetCategory>();
+            BudgetCategories = new List<Category>();
 
             if (string.IsNullOrEmpty(label))
                 label = "Default GroupCategory label";
@@ -26,7 +26,7 @@ namespace Budgets.Domain
 
         private Money GetAssignedMoney()
         {
-            return BudgetCategories.Sum(budgetCategory => budgetCategory.MoneyAssigned.Sum(moneyAssigned => moneyAssigned.Value.Amount));
+            return BudgetCategories.Sum(category => category.MoneyAssigned.Sum(moneyAssigned => moneyAssigned.Value.Amount));
         }
 
         public Money GetAssignedMoney(MonthYear monthYear)
@@ -44,7 +44,7 @@ namespace Budgets.Domain
                 .Sum(money => money.Amount);
         }
 
-        public void AddBudgetCategories(params BudgetCategory[] budgetCategories)
+        public void AddBudgetCategories(params Category[] budgetCategories)
         {
             BudgetCategories.AddRange(budgetCategories);
         }

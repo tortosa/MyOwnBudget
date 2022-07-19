@@ -5,7 +5,7 @@ using Budgets.Domain;
 
 namespace Budgets.Tests.Common.Builders
 {
-    public class BudgetCategoryBuilder
+    public class CategoryBuilder
     {
         public int Id { get; private set; }
         public int GroupCategoryId { get; private set; }
@@ -13,7 +13,7 @@ namespace Budgets.Tests.Common.Builders
         public Dictionary<MonthYear, Money> MoneyAssigned  { get; private set; }
         public List<Transaction> TransactionsAssociated  { get; private set; }
 
-        public BudgetCategoryBuilder()
+        public CategoryBuilder()
         {
             Id = 0;
             GroupCategoryId = 0;
@@ -22,25 +22,25 @@ namespace Budgets.Tests.Common.Builders
             Label = "defaultLabel";
         }
 
-        public BudgetCategoryBuilder WithId(int id)
+        public CategoryBuilder WithId(int id)
         {
             this.Id = id;
             return this;
         }
 
-        public BudgetCategoryBuilder WithGroupCategoryId(int groupCategoryId)
+        public CategoryBuilder WithGroupCategoryId(int groupCategoryId)
         {
             this.GroupCategoryId = groupCategoryId;
             return this;
         }
 
-        public BudgetCategoryBuilder WithLabel(string label)
+        public CategoryBuilder WithLabel(string label)
         {
             this.Label = label;
             return this;
         }
 
-        public BudgetCategoryBuilder WithMoneyAssigned(MonthYear monthYear, Money money)
+        public CategoryBuilder WithMoneyAssigned(MonthYear monthYear, Money money)
         {
             if(MoneyAssigned.ContainsKey(monthYear))
                 MoneyAssigned.Remove(monthYear);
@@ -48,16 +48,16 @@ namespace Budgets.Tests.Common.Builders
             return this;
         }
 
-        public BudgetCategory Build()
+        public Category Build()
         {
-            var budgetCategory = new BudgetCategory(Id, Label);
+            var category = new Category(Id, Label);
             foreach(var dict in MoneyAssigned)
             {
-                budgetCategory.AssignMoney(dict.Key, dict.Value);
+                category.AssignMoney(dict.Key, dict.Value);
             }
 
-            budgetCategory.AssociateTransaction(TransactionsAssociated.ToArray());
-            return budgetCategory;
+            category.AssociateTransaction(TransactionsAssociated.ToArray());
+            return category;
         }
     }
 }

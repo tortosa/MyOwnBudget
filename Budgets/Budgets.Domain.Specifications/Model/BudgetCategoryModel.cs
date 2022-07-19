@@ -1,6 +1,6 @@
 ﻿namespace Budgets.Domain.Specifications.Model
 {
-    public class BudgetCategoryModel
+    public class CategoryModel
     {
         public int Id { get; set; }
         public int GroupCategoryId { get; set; }

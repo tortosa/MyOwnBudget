@@ -4,13 +4,13 @@ using System.Linq;
 
 namespace Budgets.Domain.Specifications.Contexts
 {
-    public class BudgetCategoryContext
+    public class CategoryContext
     {
-        public BudgetCategoryContext()
+        public CategoryContext()
         {
-            BudgetCategories = Enumerable.Empty<BudgetCategoryBuilder>();
+            Categories = Enumerable.Empty<CategoryBuilder>();
         }
 
-        public IEnumerable<BudgetCategoryBuilder> BudgetCategories { get; set; }
+        public IEnumerable<CategoryBuilder> Categories { get; set; }
     }
 }

@@ -96,22 +96,22 @@ namespace Budgets.Domain.UnitTests
             var monthYear = new MonthYear(Month.May, 2022);
             var anotherMonthYear = new MonthYear(Month.April, 2022);
 
-            var budgetCategoryAssigned1 = new BudgetCategoryBuilder()
+            var categoryAssigned1 = new CategoryBuilder()
                 .WithMoneyAssigned(monthYear, money1)
                 .Build();
-            var budgetCategoryAssigned2 = new BudgetCategoryBuilder()
+            var categoryAssigned2 = new CategoryBuilder()
                 .WithMoneyAssigned(monthYear, money2)
                 .Build();
-            var budgetCategoryAssigned3 = new BudgetCategoryBuilder()
+            var categoryAssigned3 = new CategoryBuilder()
                 .WithMoneyAssigned(anotherMonthYear, money3)
                 .Build();
 
             var GroupCategory1 = new GroupCategoryBuilder()
-                .WithBudgetCategories(budgetCategoryAssigned1, budgetCategoryAssigned2)
+                .WithBudgetCategories(categoryAssigned1, categoryAssigned2)
                 .Build();
 
             var GroupCategory2 = new GroupCategoryBuilder()
-                .WithBudgetCategories(budgetCategoryAssigned3)
+                .WithBudgetCategories(categoryAssigned3)
                 .Build();
 
             var budget = new BudgetBuilder()

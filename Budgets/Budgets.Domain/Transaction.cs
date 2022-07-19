@@ -11,20 +11,20 @@ namespace Budgets.Domain
         public Money Money { get; }
         public DateTime Date { get; }
         public Payee Payee { get; }
-        public BudgetCategory BudgetCategory { get; }
+        public Category Category { get; }
         public Account Account { get; }
 
-        public Transaction(int id, Money money, DateTime date, Payee payee, BudgetCategory budgetCategory, Account account)
+        public Transaction(int id, Money money, DateTime date, Payee payee, Category category, Account account)
         {
             Id = id;
             Money = money;
             Date = date;
             Payee = payee;
-            BudgetCategory = budgetCategory;
+            Category = category;
             Account = account;
 
             Account.AddTransactions(this);
-            BudgetCategory.AssociateTransaction(this);
+            Category.AssociateTransaction(this);
         }
     }
 }

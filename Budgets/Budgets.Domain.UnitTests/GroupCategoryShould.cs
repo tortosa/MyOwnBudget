@@ -54,18 +54,18 @@ namespace Budgets.Domain.UnitTests
             var monthYear = new MonthYear(Month.May, 2022);
             var anotherMonthYear = new MonthYear(Month.April, 2022);
 
-            var budgetCategoryAssigned1 = new BudgetCategoryBuilder()
+            var categoryAssigned1 = new CategoryBuilder()
                 .WithMoneyAssigned(monthYear, money1)
                 .Build();
-            var budgetCategoryAssigned2 = new BudgetCategoryBuilder()
+            var categoryAssigned2 = new CategoryBuilder()
                 .WithMoneyAssigned(monthYear, money2)
                 .Build();
-            var budgetCategoryAssigned3 = new BudgetCategoryBuilder()
+            var categoryAssigned3 = new CategoryBuilder()
                 .WithMoneyAssigned(anotherMonthYear, money3)
                 .Build();
 
             var groupCategory = new GroupCategoryBuilder()
-                .WithBudgetCategories(budgetCategoryAssigned1, budgetCategoryAssigned2, budgetCategoryAssigned3)
+                .WithBudgetCategories(categoryAssigned1, categoryAssigned2, categoryAssigned3)
                 .Build();
 
             Assert.Equal(expectedAssigned, groupCategory.GetAssignedMoney(monthYear));
@@ -85,28 +85,28 @@ namespace Budgets.Domain.UnitTests
 
             var moneyTransactionInJune = Money.Euro(-20);
 
-            var budgetCategoryMay = new BudgetCategoryBuilder()
+            var categoryMay = new CategoryBuilder()
                 .WithMoneyAssigned(monthYearMay, moneyAssignedInMay)
                 .Build();
 
-            var budgetCategoryJune = new BudgetCategoryBuilder()
+            var categoryJune = new CategoryBuilder()
                 .WithMoneyAssigned(monthYearJune, moneyAssignedInJune)
                 .Build();
 
             var transactionMay1 = new TransactionBuilder()
-                .WithBudgetCategory(budgetCategoryMay)
+                .WithCategory(categoryMay)
                 .WithMoney(moneyTransactionInMay1)
                 .WithDate(new DateTime(monthYearMay.Year, (int)monthYearMay.Month, 16, 10, 00, 00))
                 .Build();
 
             var transactionMay2 = new TransactionBuilder()
-                .WithBudgetCategory(budgetCategoryMay)
+                .WithCategory(categoryMay)
                 .WithMoney(moneyTransactionInMay2)
                 .WithDate(new DateTime(monthYearMay.Year, (int)monthYearMay.Month, 20, 10, 00, 00))
                 .Build();
 
             var transactionJune = new TransactionBuilder()
-                .WithBudgetCategory(budgetCategoryJune)
+                .WithCategory(categoryJune)
                 .WithMoney(moneyTransactionInJune)
                 .WithDate(new DateTime(monthYearJune.Year, (int)monthYearJune.Month, 20, 10, 00, 00))
                 .Build();
@@ -116,7 +116,7 @@ namespace Budgets.Domain.UnitTests
                 .Build();
 
             var GroupCategory = new GroupCategoryBuilder()
-                .WithBudgetCategories(budgetCategoryMay, budgetCategoryJune)
+                .WithBudgetCategories(categoryMay, categoryJune)
                 .Build();
 
             var expectedMoneyAvailableInJune = moneyAssignedInJune + moneyAssignedInMay + moneyTransactionInMay1 + moneyTransactionInMay2 + moneyTransactionInJune;

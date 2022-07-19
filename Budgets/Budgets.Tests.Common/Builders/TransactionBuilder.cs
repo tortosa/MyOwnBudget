@@ -10,7 +10,7 @@ namespace Budgets.Tests.Common.Builders
         public Money Money { get; private set; }
         public DateTime Date { get; private set; }
         public Payee Payee { get; private set; }
-        public BudgetCategory BudgetCategory { get; private set; }
+        public Category Category { get; private set; }
         public Account Account { get; private set; }
 
         public TransactionBuilder()
@@ -20,7 +20,7 @@ namespace Budgets.Tests.Common.Builders
             Date = new DateTime(2022, 6, 5);
             Payee = new PayeeBuilder().Build();
             Account = new AccountBuilder().Build();
-            BudgetCategory = new BudgetCategoryBuilder().Build();
+            Category = new CategoryBuilder().Build();
         }
 
         public TransactionBuilder WithId(int id)
@@ -47,9 +47,9 @@ namespace Budgets.Tests.Common.Builders
             return this;
         }
 
-        public TransactionBuilder WithBudgetCategory(BudgetCategory budgetCategory)
+        public TransactionBuilder WithCategory(Category category)
         {
-            this.BudgetCategory = budgetCategory;
+            this.Category = category;
             return this;
         }
 
@@ -61,7 +61,7 @@ namespace Budgets.Tests.Common.Builders
 
         public Transaction Build()
         {
-            var transaction = new Transaction(Id, Money, Date, Payee, BudgetCategory, Account);
+            var transaction = new Transaction(Id, Money, Date, Payee, Category, Account);
             return transaction;
         }
     }

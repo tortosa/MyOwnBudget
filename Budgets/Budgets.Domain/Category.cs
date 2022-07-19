@@ -5,22 +5,22 @@ using System.Linq;
 
 namespace Budgets.Domain
 {
-    public class BudgetCategory
+    public class Category
     {
-        protected BudgetCategory() { }
+        protected Category() { }
 
         public int Id { get; }
         public string Label { get; }
         public Dictionary<MonthYear, Money> MoneyAssigned { get; }
         public List<Transaction> TransactionsAssociated { get; }
 
-        public BudgetCategory(int id, string label)
+        public Category(int id, string label)
         {
             MoneyAssigned = new Dictionary<MonthYear, Money>();
             TransactionsAssociated = new List<Transaction>();
 
             if (string.IsNullOrEmpty(label))
-                label = "Default BudgetCategory label";
+                label = "Default Category label";
             Label = label;
             Id = id;
         }

@@ -8,16 +8,16 @@ namespace Budgets.Tests.Common.Builders
     {
         public int Id { get; private set; }
         public int BudgetId { get; private set; }
-        public string label { get; private set; }
-        public List<BudgetCategory> budgetCategories { get; private set; }
-        public List<BudgetCategoryBuilder> budgetCategoryBuilders { get; private set; }
+        public string Label { get; private set; }
+        public List<Category> Categories { get; private set; }
+        public List<CategoryBuilder> CategoryBuilders { get; private set; }
 
         public GroupCategoryBuilder()
         {
             Id = 0;
-            label = "defaultLabel";
-            budgetCategories = new List<BudgetCategory>();
-            budgetCategoryBuilders = new List<BudgetCategoryBuilder>();
+            Label = "defaultLabel";
+            Categories = new List<Category>();
+            CategoryBuilders = new List<CategoryBuilder>();
         }
 
         public GroupCategoryBuilder WithId(int id)
@@ -34,32 +34,32 @@ namespace Budgets.Tests.Common.Builders
 
         public GroupCategoryBuilder WithLabel(string label)
         {
-            this.label = label;
+            this.Label = label;
             return this;
         }
 
-        public GroupCategoryBuilder WithBudgetCategories(params BudgetCategory[] budgetCategories)
+        public GroupCategoryBuilder WithBudgetCategories(params Category[] budgetCategories)
         {
-            this.budgetCategories.AddRange(budgetCategories);
+            this.Categories.AddRange(budgetCategories);
             return this;
         }
 
-        public GroupCategoryBuilder WithBudgetCategories(params BudgetCategoryBuilder[] budgetCategoryBuilders)
+        public GroupCategoryBuilder WithBudgetCategories(params CategoryBuilder[] categoryBuilders)
         {
-            this.budgetCategoryBuilders.AddRange(budgetCategoryBuilders);
+            this.CategoryBuilders.AddRange(categoryBuilders);
             return this;
         }
 
         public GroupCategory Build()
         {
-            var budgetCategory = new GroupCategory(Id, label);
+            var category = new GroupCategory(Id, Label);
 
-            var categoryBuilders = budgetCategoryBuilders.Select(builder => builder.Build());
-            var categories = budgetCategories.Concat(categoryBuilders);
+            var categoryBuilders = CategoryBuilders.Select(builder => builder.Build());
+            var categories = Categories.Concat(categoryBuilders);
 
-            budgetCategory.AddBudgetCategories(categories.ToArray());
+            category.AddBudgetCategories(categories.ToArray());
 
-            return budgetCategory;
+            return category;
         }
     }
 }

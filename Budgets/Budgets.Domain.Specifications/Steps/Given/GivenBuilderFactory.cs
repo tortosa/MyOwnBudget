@@ -40,14 +40,14 @@ namespace Budgets.Domain.Specifications.Steps.Given
             return domainGroupCategory;
         }
 
-        public static IEnumerable<BudgetCategoryBuilder> GivenCategory(IEnumerable<BudgetCategoryModel> categoryModels)
+        public static IEnumerable<CategoryBuilder> GivenCategory(IEnumerable<CategoryModel> categoryModels)
         {
-            var domainCategory = new List<BudgetCategoryBuilder>();
+            var domainCategory = new List<CategoryBuilder>();
 
             foreach (var categoryModel in categoryModels)
             {
                 domainCategory.Add(
-                    new BudgetCategoryBuilder()
+                    new CategoryBuilder()
                     .WithId(categoryModel.Id)
                     .WithGroupCategoryId(categoryModel.GroupCategoryId)
                     .WithLabel(categoryModel.Label)
