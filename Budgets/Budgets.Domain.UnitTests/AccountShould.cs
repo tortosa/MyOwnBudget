@@ -6,6 +6,17 @@ namespace Budgets.Domain.UnitTests
 {
     public class AccountShould
     {
+         [Fact]
+        public void AccountShouldHaveId()
+        {
+            var expectedId = 1;
+            var account = new AccountBuilder()
+                .WithId(expectedId)
+                .Build();
+
+            Assert.Equal(expectedId, account.Id);             
+        }
+
         [Fact]
         public void AccountShouldHaveLabel()
         {
