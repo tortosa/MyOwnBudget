@@ -22,6 +22,21 @@ namespace Budgets.Domain.Specifications.Steps.Given
             return domainAccounts;
         }
 
+        public static IEnumerable<PayeeBuilder> GivenPayees(IEnumerable<PayeeModel> payees)
+        {
+            var domainPayees = new List<PayeeBuilder>();
+
+            foreach (var payee in payees)
+            {
+                domainPayees.Add(
+                    new PayeeBuilder()
+                    .WithId(payee.Id)
+                    .WithLabel(payee.Label)
+                    );
+            }
+            return domainPayees;
+        }
+
         public static IEnumerable<BudgetBuilder> GivenBudgets(IEnumerable<BudgetModel> budgets)
         {
             var domainBudgets = new List<BudgetBuilder>();
