@@ -7,6 +7,21 @@ namespace Budgets.Domain.Specifications.Steps.Given
 {
     public static class GivenBuilderFactory
     {
+        public static IEnumerable<AccountBuilder> GivenAccounts(IEnumerable<AccountModel> accounts)
+        {
+            var domainAccounts = new List<AccountBuilder>();
+
+            foreach (var account in accounts)
+            {
+                domainAccounts.Add(
+                    new AccountBuilder()
+                    .WithId(account.Id)
+                    .WithLabel(account.Label)
+                    );
+            }
+            return domainAccounts;
+        }
+
         public static IEnumerable<BudgetBuilder> GivenBudgets(IEnumerable<BudgetModel> budgets)
         {
             var domainBudgets = new List<BudgetBuilder>();
