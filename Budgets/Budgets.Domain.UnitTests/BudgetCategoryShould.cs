@@ -10,6 +10,17 @@ namespace Budgets.Domain.UnitTests
     public class BudgetCategoryShould
     {
         [Fact]
+        public void BudgetCategoryShouldHaveId()
+        {
+            var expectedId = 1;
+            var budgetCategory = new BudgetCategoryBuilder()
+                .WithId(expectedId)
+                .Build();
+
+            Assert.Equal(expectedId, budgetCategory.Id);
+        }
+
+        [Fact]
         public void BudgetCategoryShouldHaveLabel()
         {
             var expectedLabel = "budgetCategory name";
