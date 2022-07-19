@@ -72,13 +72,40 @@ namespace Budgets.Domain.Specifications.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("MayJunExample", SourceLine=4)]
+        public virtual void FeatureBackground()
+        {
+#line 5
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Label"});
+            table1.AddRow(new string[] {
+                        "1",
+                        "General Account"});
+#line 6
+ testRunner.Given("Accounts", ((string)(null)), table1, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Label"});
+            table2.AddRow(new string[] {
+                        "1",
+                        "Payee 1"});
+            table2.AddRow(new string[] {
+                        "2",
+                        "Payee 2"});
+#line 9
+ testRunner.And("Payees", ((string)(null)), table2, "And ");
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("MayJunExample", SourceLine=13)]
         public virtual void MayJunExample()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("MayJunExample", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 5
+#line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -98,107 +125,127 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+#line 5
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Label",
                             "DateFormat",
                             "Currency"});
-                table1.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             "1",
                             "MyBudget",
                             "dd/MM/yyyy",
                             "EUR"});
-#line 6
- testRunner.Given("Budgets", ((string)(null)), table1, "Given ");
+#line 15
+ testRunner.Given("Budgets", ((string)(null)), table3, "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "BudgetId",
                             "Label"});
-                table2.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "1",
                             "1",
                             "Subscriptions"});
-                table2.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "2",
                             "1",
                             "Vehicles"});
-                table2.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "3",
                             "1",
                             "Savings"});
-#line 9
- testRunner.And("GroupCategory associated to budgets", ((string)(null)), table2, "And ");
+#line 18
+ testRunner.And("GroupCategory associated to budgets", ((string)(null)), table4, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "GroupCategoryId",
                             "Label"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "1",
                             "1",
                             "Asisa"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "2",
                             "1",
                             "Netflix"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "3",
                             "1",
                             "Amazon Music"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "4",
                             "1",
                             "Amazon Prime"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "5",
                             "1",
                             "PlayStation Network"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "6",
                             "2",
                             "Kia Ceed Insurance"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "7",
                             "2",
                             "Honda PCX Insurance"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "8",
                             "2",
                             "IVTM Honda PCX"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "9",
                             "2",
                             "IVTM Kia Ceed"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "10",
                             "3",
                             "Holidays"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "11",
                             "3",
                             "Christmas"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "12",
                             "3",
                             "Bicycle"});
-#line 14
- testRunner.And("Category associated to GroupCategory", ((string)(null)), table3, "And ");
+#line 23
+ testRunner.And("Category associated to GroupCategory", ((string)(null)), table5, "And ");
 #line hidden
-#line 28
- testRunner.When("MyBudget is actioned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 37
+ testRunner.When("Transaction is added to MyBudget on 16/05/2022 to Account General Account, Payee " +
+                        "Payee 1, Category Asisa with and amount of 100.12 - EUR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 29
- testRunner.Then("GroupCategory Subscriptions should have 1000.52 EUR assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 38
+ testRunner.And("Transaction is added to MyBudget on 18/05/2022 to Account General Account, Payee " +
+                        "Payee 2, Category Amazon Prime with and amount of 49.88 - EUR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 30
- testRunner.Then("GroupCategory Subscriptions should have 1000.52 EUR available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 39
+ testRunner.And("Assign an amount of 49.88 - EUR at June/2022 to Category Amazon Prime", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 31
- testRunner.Then("Category Asisa should have 41.34 EUR assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 40
+ testRunner.Then("GroupCategory with label Subscriptions should have 199.88 available at June/2022", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 32
- testRunner.Then("Category Asisa should have 1.34 EUR available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 41
+ testRunner.And("GroupCategory with label Vehicles should have 0.00 available at June/2022", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 42
+ testRunner.Then("Category with label Asisa should have 100.12 available at June/2022", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 43
+ testRunner.And("Category with label Amazon Prime should have 49.88 available at May/2022", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 44
+ testRunner.Then("GroupCategory with label Subscriptions should have 49.88 assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 45
+ testRunner.And("Category with label Asisa should have 0.00 assigned at June/2022", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 46
+ testRunner.And("Category with label Amazon Prime should have 49.88 assigned at June/2022", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
