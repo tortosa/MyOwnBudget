@@ -1,10 +1,10 @@
 ﻿using Budgets.Domain.Specifications.Contexts;
 using Budgets.Domain.Specifications.Model;
 using Budgets.Domain.Specifications.Steps.Given;
+using System;
 using System.Linq;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using Xunit;
 
 namespace Budgets.Domain.Specifications.Steps
 {
@@ -25,7 +25,7 @@ namespace Budgets.Domain.Specifications.Steps
         {
             var modelList = table.CreateSet<GroupCategoryModel>().ToList();
             if (modelList.Select(model => model.Id).Count() != modelList.Count)
-                Assert.True(false, "Check your category group ids, they may be duplicated");
+                throw new Exception("Check your GroupCategory ids, they may be duplicated");
 
             categoryGroupContext.GroupCategories = GivenBuilderFactory.GivenGroupCategory(modelList);
 

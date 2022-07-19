@@ -1,7 +1,6 @@
 ﻿using Budgets.Domain.Specifications.Model;
 using Budgets.Tests.Common.Builders;
 using System.Collections.Generic;
-using Xunit;
 
 namespace Budgets.Domain.Specifications.Steps.Given
 {

@@ -3,12 +3,12 @@ using Budgets.Domain.Specifications.Model;
 using Budgets.Domain.Specifications.Steps.Given;
 using Budgets.Domain.ValueObjects;
 using Budgets.Tests.Common.Builders;
+using FluentAssertions;
 using NodaMoney;
 using System;
 using System.Linq;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using Xunit;
 
 namespace Budgets.Domain.Specifications.Steps
 {
@@ -33,7 +33,7 @@ namespace Budgets.Domain.Specifications.Steps
         {
             var modelList = table.CreateSet<BudgetModel>().ToList();
             if (modelList.Select(model => model.Id).Count() != modelList.Count)
-                Assert.True(false, "Check your budget ids, they may be duplicated");
+                throw new Exception("Check your budget ids, they may be duplicated");
 
             budgetContext.Budgets = GivenBuilderFactory.GivenBudgets(modelList);
         }
@@ -73,7 +73,7 @@ namespace Budgets.Domain.Specifications.Steps
         {
             var groupCategory = budgetActioned.GroupCategories.Where(x => x.Label.Equals(label, StringComparison.InvariantCultureIgnoreCase)).Single();
 
-            Assert.Equal(expectedAmount, groupCategory.AssignedMoney.Amount);
+            groupCategory.AssignedMoney.Amount.Should().Be(expectedAmount);
         }
 
         [Then(@"GroupCategory with label (.*) should have (.*) available at (.*)/(.*)")]
@@ -82,7 +82,7 @@ namespace Budgets.Domain.Specifications.Steps
             var groupCategory = budgetActioned.GroupCategories.Where(x => x.Label.Equals(label, StringComparison.InvariantCultureIgnoreCase)).Single();
             Month monthEnum = (Month)Enum.Parse(typeof(Month), month);
 
-            Assert.Equal(expectedAmount, groupCategory.GetAvailableMoneyAt(new MonthYear(monthEnum, year)).Amount);
+            groupCategory.GetAvailableMoneyAt(new MonthYear(monthEnum, year)).Amount.Should().Be(expectedAmount);
         }
 
         [Then(@"Category with label (.*) should have (.*) assigned at (.*)/(.*)")]
@@ -91,7 +91,7 @@ namespace Budgets.Domain.Specifications.Steps
             var category = budgetActioned.GroupCategories.Select(x => x.Categories.SingleOrDefault(c => c.Label.Equals(label, StringComparison.InvariantCultureIgnoreCase))).Where(x => x != null).Single();
             Month monthEnum = (Month)Enum.Parse(typeof(Month), month);
 
-            Assert.Equal(expectedAmount, category.GetAssignedMoneyAt(new MonthYear(monthEnum, year)).Amount);
+            category.GetAssignedMoneyAt(new MonthYear(monthEnum, year)).Amount.Should().Be(expectedAmount);
         }
 
         [Then(@"Category with label (.*) should have (.*) available at (.*)/(.*)")]
@@ -100,7 +100,7 @@ namespace Budgets.Domain.Specifications.Steps
             var category = budgetActioned.GroupCategories.Select(x => x.Categories.SingleOrDefault(c => c.Label.Equals(label, StringComparison.InvariantCultureIgnoreCase))).Where(x => x != null).Single();
             Month monthEnum = (Month)Enum.Parse(typeof(Month), month);
 
-            Assert.Equal(expectedAmount, category.GetAvailableMoneyAt(new MonthYear(monthEnum, year)).Amount);
+            category.GetAvailableMoneyAt(new MonthYear(monthEnum, year)).Amount.Should().Be(expectedAmount);
         }
     }
 }
