@@ -11,7 +11,7 @@ namespace Budgets.Domain.UnitTests
     public class CategoryShould
     {
         [Fact]
-        public void CategoryShouldHaveId()
+        public void HaveId()
         {
             var expectedId = 1;
             var category = new CategoryBuilder()
@@ -22,7 +22,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void CategoryShouldHaveLabel()
+        public void HaveLabel()
         {
             var expectedLabel = "category name";
             var category = new CategoryBuilder()
@@ -33,7 +33,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void CategoryShouldNotAllowEmptyLabel()
+        public void NotAllowEmptyLabel()
         {
             var expectedLabel = string.Empty;
             var category = new CategoryBuilder()
@@ -44,7 +44,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void CategoryShouldHaveAGroupCategory()
+        public void HaveAGroupCategory()
         {
             var expectedLabel = "GroupCategory";
             var category = new CategoryBuilder()
@@ -59,7 +59,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void CategoryShouldHaveAssignedMoneyAtMonthYear()
+        public void HaveAssignedMoneyAtMonthYear()
         {
             var monthYear = new MonthYear(Month.April, 2030);
             var expectedMoneyAssigned = Money.Euro(1250.23);
@@ -72,7 +72,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void CategoryShouldKeepLastRecordOfMoneyAssignedAtSameMonthYear()
+        public void KeepLastRecordOfMoneyAssignedAtSameMonthYear()
         {
             var monthYear = new MonthYear(Month.April, 2022);
             var moneyFirst = Money.Euro(1250.23);
@@ -86,7 +86,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void CategoryShouldHaveRightAvailableMoneyAtNextMonthYear()
+        public void HaveRightAvailableMoneyAtNextMonthYear()
         {
             var monthYearMay = new MonthYear(Month.May, 2022);
             var monthYearJune = new MonthYear(Month.June, 2022);
@@ -130,7 +130,7 @@ namespace Budgets.Domain.UnitTests
         }
 
          [Fact]
-        public void CategoryShouldReturnZeroMoneyAssignedWhenNothingAssigned()
+        public void ReturnZeroMoneyAssignedWhenNothingAssigned()
         {
             var monthYear = new MonthYear(Month.April, 2022);
             var expectedMoney = Money.Euro(0);

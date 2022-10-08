@@ -9,7 +9,7 @@ namespace Budgets.Domain.UnitTests
     public class BudgetShould
     {
         [Fact]
-        public void BudgetShouldHaveId()
+        public void HaveId()
         {
             var expectedId = 1;
             var budget = new BudgetBuilder()
@@ -20,7 +20,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void BudgetShouldHaveLabel()
+        public void HaveLabel()
         {
             var expectedLabel = "account name";
             var budget = new BudgetBuilder()
@@ -31,7 +31,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void BudgetShouldNotAllowEmptyLabel()
+        public void NotAllowEmptyLabel()
         {
             var expectedLabel = string.Empty;
             var budget = new BudgetBuilder()
@@ -42,7 +42,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void BudgetShouldHaveCurrencyCode()
+        public void HaveCurrencyCode()
         {
             var expectedCurrencyCode = "EUR";
             var budget = new BudgetBuilder()
@@ -53,7 +53,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void BudgetShouldHaveDateFormat()
+        public void HaveDateFormat()
         {
             var expectedDateFormat = "YYYY-MM-DD";
             var budget = new BudgetBuilder()
@@ -64,7 +64,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void BudgetShouldHaveGroupCategories()
+        public void HaveGroupCategories()
         {
             var GroupCategoryLabel1 = "Group1";
             var GroupCategoryLabel2 = "Group2";

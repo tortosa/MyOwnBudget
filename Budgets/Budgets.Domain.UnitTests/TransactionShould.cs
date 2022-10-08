@@ -9,7 +9,7 @@ namespace Budgets.Domain.UnitTests
     public class TransactionShould
     {
         [Fact]
-        public void PayeeTransactionShouldHaveId()
+        public void HaveId()
         {
             var expectedId = 1;
             var transaction = new TransactionBuilder()
@@ -20,7 +20,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void TransactionShouldHaveMoney()
+        public void HaveMoney()
         {
             var expectedMoney = Money.Euro(6.54);
 
@@ -32,7 +32,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void TransactionShouldHaveDate()
+        public void HaveDate()
         {
             var expectedDate = new DateTime(2022, 6, 5, 12, 30, 20);
             var transaction = new TransactionBuilder()
@@ -43,7 +43,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void TransactionShouldHaveCategory()
+        public void HaveCategory()
         {
             var expectedCategory = new CategoryBuilder()
                 .Build();
@@ -56,7 +56,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void TransactionShouldHavePayee()
+        public void HavePayee()
         {
             var expectedLabel = "Payee";
             var payee = new PayeeBuilder()
@@ -71,7 +71,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void TransactionShouldHaveAccount()
+        public void HaveAccount()
         {
             var expectedAccount = new AccountBuilder()
                 .Build();

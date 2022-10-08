@@ -7,7 +7,7 @@ namespace Budgets.Domain.UnitTests
     public class MonthYearShould
     {
         [Fact]
-        public void MonthYearShouldReturnSameThanOperators()
+        public void ReturnSameThanOperators()
         {
             MonthYear monthYearNull = null;
             var monthYear = new MonthYear(Month.January, 2022);
@@ -20,7 +20,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void MonthYearShouldBeEqualToAnotherInstanceWithSameValues()
+        public void BeEqualToAnotherInstanceWithSameValues()
         {
             var month = Month.May;
             var year = 2022;
@@ -32,7 +32,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void MonthYearShouldBeEqualToAnotherInstanceWithSameValuesWithOperator()
+        public void BeEqualToAnotherInstanceWithSameValuesWithOperator()
         {
             var month = Month.May;
             var year = 2022;
@@ -45,7 +45,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void MonthYearShouldReturnPreviousMonth()
+        public void ReturnPreviousMonth()
         {
             var expectedMonth = Month.April;
             var month = Month.May;
@@ -58,7 +58,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void MonthYearShouldReturnPreviousMonthChangingYear()
+        public void ReturnPreviousMonthChangingYear()
         {
             var expectedMonth = Month.December;
             var month = Month.January;
