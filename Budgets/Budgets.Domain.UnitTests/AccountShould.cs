@@ -8,7 +8,7 @@ namespace Budgets.Domain.UnitTests
     public class AccountShould
     {
          [Fact]
-        public void AccountShouldHaveId()
+        public void HaveId()
         {
             var expectedId = 1;
             var account = new AccountBuilder()
@@ -19,7 +19,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void AccountShouldHaveLabel()
+        public void HaveLabel()
         {
             var expectedLabel = "account name";
             var account = new AccountBuilder()
@@ -30,7 +30,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void AccountShouldNotAllowEmptyLabel()
+        public void NotAllowEmptyLabel()
         {
             var expectedLabel = string.Empty;
             var account = new AccountBuilder()
@@ -41,7 +41,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void AccountShouldReturnBalanceOfTransactions()
+        public void ReturnBalanceOfTransactions()
         {
             var sum1 = 182.31;
             var sum2 = -21.43;

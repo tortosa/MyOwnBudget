@@ -11,7 +11,7 @@ namespace Budgets.Domain.UnitTests
     {
 
         [Fact]
-        public void GroupCategoryShouldHaveId()
+        public void HaveId()
         {
             var expectedId = 1;
             var GroupCategory = new GroupCategoryBuilder()
@@ -22,7 +22,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void GroupCategoryShouldHaveLabel()
+        public void HaveLabel()
         {
             var expectedLabel = "GroupCategory name";
             var groupCategory = new GroupCategoryBuilder()
@@ -33,7 +33,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void GroupCategoryShouldNotAllowEmptyLabel()
+        public void NotAllowEmptyLabel()
         {
             var expectedLabel = string.Empty;
             var groupCategory = new GroupCategoryBuilder()
@@ -44,7 +44,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void GroupCategoryAssignedMoneyShouldReturnTheBalanceOfTheirCategories()
+        public void GetAssignedMoneyFromTheirCategories()
         {
             var money1 = Money.Euro(10);
             var money2 = Money.Euro(20);
@@ -73,7 +73,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void GroupCategoryAvailableMoneyShouldReturnTheBalanceOfTheirCategories()
+        public void GetAvailableMoneyFromTheirCategories()
         {
             var monthYearMay = new MonthYear(Month.May, 2022);
             var monthYearJune = new MonthYear(Month.June, 2022);

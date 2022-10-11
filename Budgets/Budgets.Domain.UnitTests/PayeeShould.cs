@@ -7,7 +7,7 @@ namespace Budgets.Domain.UnitTests
     public class PayeeShould
     {
         [Fact]
-        public void PayeeShouldHaveId()
+        public void HaveId()
         {
             var expectedId = 1;
             var payee = new PayeeBuilder()
@@ -18,7 +18,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void PayeeShouldHaveLabel()
+        public void HaveLabel()
         {
             var expectedLabel = "GroupCategory name";
             var payee = new PayeeBuilder()
@@ -29,7 +29,7 @@ namespace Budgets.Domain.UnitTests
         }
 
         [Fact]
-        public void PayeeShouldShouldNotAllowEmptyLabel()
+        public void ShouldNotAllowEmptyLabel()
         {
             var expectedLabel = string.Empty;
             var payee = new PayeeBuilder()
