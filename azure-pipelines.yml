@@ -32,4 +32,5 @@ steps:
   displayName: 'dotnet test'
   inputs:
     command: test
-    projects: 'Budgets.Domain.Specifications'
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
