@@ -1,7 +1,7 @@
 ﻿using NodaMoney;
 using System;
 
-namespace Budgets.Domain
+namespace Budgets.Domain.Aggregates
 {
     public class Transaction
     {

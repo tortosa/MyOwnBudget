@@ -1,4 +1,4 @@
-﻿using Budgets.Domain;
+﻿using Budgets.Domain.Aggregates;
 
 namespace Budgets.Tests.Common.Builders
 {

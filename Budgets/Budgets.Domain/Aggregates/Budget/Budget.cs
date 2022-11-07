@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Budgets.Domain
+namespace Budgets.Domain.Aggregates
 {
     public class Budget
     {

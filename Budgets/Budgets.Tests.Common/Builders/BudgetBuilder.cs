@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Budgets.Domain.Aggregates;
+using System.Collections.Generic;
 using System.Linq;
-using Budgets.Domain;
 
 namespace Budgets.Tests.Common.Builders
 {

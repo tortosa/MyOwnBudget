@@ -1,7 +1,7 @@
-﻿using Budgets.Domain.ValueObjects;
+﻿using Budgets.Domain.Aggregates;
+using Budgets.Domain.ValueObjects;
 using NodaMoney;
 using System.Collections.Generic;
-using Budgets.Domain;
 
 namespace Budgets.Tests.Common.Builders
 {

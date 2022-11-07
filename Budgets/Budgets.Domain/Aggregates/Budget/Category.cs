@@ -3,7 +3,7 @@ using NodaMoney;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Budgets.Domain
+namespace Budgets.Domain.Aggregates
 {
     public class Category
     {
@@ -56,7 +56,7 @@ namespace Budgets.Domain
 
         public Money GetAssignedMoneyAt(MonthYear monthYear)
         {
-            if(!MoneyAssigned.ContainsKey(monthYear))
+            if (!MoneyAssigned.ContainsKey(monthYear))
                 return 0;
             return MoneyAssigned[monthYear];
         }

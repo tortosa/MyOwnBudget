@@ -3,7 +3,7 @@ using NodaMoney;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Budgets.Domain
+namespace Budgets.Domain.Aggregates
 {
     public class GroupCategory
     {
@@ -32,7 +32,7 @@ namespace Budgets.Domain
         public Money GetAssignedMoney(MonthYear monthYear)
         {
             return Categories
-                .Select(category => category.MoneyAssigned)                
+                .Select(category => category.MoneyAssigned)
                 .SelectMany(moneyAssigned => moneyAssigned.Where(moneyAssigned => moneyAssigned.Key == monthYear))
                 .Sum(money => money.Value.Amount);
         }

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Budgets.Domain;
+﻿using Budgets.Domain.Aggregates;
+using System.Collections.Generic;
 
 namespace Budgets.Tests.Common.Builders
 {
