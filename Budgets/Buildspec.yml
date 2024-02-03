@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      dotnet: latest
+  pre_build:
+    commands:
+      - dotnet restore
+  build:
+    commands:
+      - dotnet build -c Release
+      - dotnet test
+  post_build:
+    commands:
+      - dotnet publish -c Release -o ./publish
+artifacts:
+  files:
+    - '**/*'
+  base-directory: './publish'
