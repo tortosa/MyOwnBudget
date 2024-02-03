@@ -9,11 +9,11 @@ phases:
       - dotnet restore Budgets/Budgets.sln
   build:
     commands:
-      - dotnet build -c Release --no-incremental
-      - dotnet test --no-build
+      - dotnet build -c Release Budgets/src/AuthenticationService/AuthenticationService.csproj
+      - dotnet test Budgets/tests/AuthenticationService.Tests/AuthenticationService.Tests.csproj
   post_build:
     commands:
-      - dotnet publish -c Release -o ./publish
+      - dotnet publish -c Release Budgets/src/AuthenticationService/AuthenticationService.csproj -o ./publish
 artifacts:
   files:
     - '**/*'

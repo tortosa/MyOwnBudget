@@ -12,6 +12,8 @@ public class AuthenticationServiceTestsShould
         var authorizationCode = "fakeAuthorizationCode";
         var expectedUserEmail = "user@example.com";
 
+        googleAuthService.GetEmailFromGoogleAsync(authorizationCode).Returns(expectedUserEmail);
+
         // Act
         var emailFromGoogle = await googleAuthService.GetEmailFromGoogleAsync(authorizationCode);
 
