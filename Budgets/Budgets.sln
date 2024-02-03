@@ -16,11 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentat
 		documentation\Budgets.docx = documentation\Budgets.docx
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{FF669697-C5E3-4F2B-9E47-3FED10B0B800}"
-	ProjectSection(SolutionItems) = preProject
-		Buildspec.yml = Buildspec.yml
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
