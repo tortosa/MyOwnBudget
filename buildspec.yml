@@ -3,14 +3,14 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      dotnet: latest
+      dotnet: 7.x
   pre_build:
     commands:
       - dotnet restore
   build:
     commands:
-      - dotnet build -c Release
-      - dotnet test
+      - dotnet build -c Release --no-incremental
+      - dotnet test --no-build
   post_build:
     commands:
       - dotnet publish -c Release -o ./publish
