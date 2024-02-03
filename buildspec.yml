@@ -3,10 +3,10 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      dotnet: 7.x
+      dotnet: 6.x
   pre_build:
     commands:
-      - dotnet restore
+      - dotnet restore Budgets/Budgets.sln
   build:
     commands:
       - dotnet build -c Release --no-incremental
